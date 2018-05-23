@@ -4,3 +4,6 @@
 /build/
 /dist/
 /TareaScouts3-war/dist/
+/TareaScouts3-ejb/nbproject/private/
+/TareaScouts3-war/nbproject/private/
+/nbproject/private/
