@@ -58,7 +58,7 @@ public class accionDocumentos implements Serializable {
         
         tmp.setEstado_documento(Documento.Estado.PENDIENTE_REVISION);
         
-        tmp.setFile(file);
+    //    tmp.setFile(file);
         
         this.docs.getDocumentos().set(index, tmp);
         
