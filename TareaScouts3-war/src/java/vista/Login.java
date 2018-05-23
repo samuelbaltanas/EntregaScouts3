@@ -32,8 +32,6 @@ public class Login {
     @Inject
     ListaUsuarios lst;
     
-    @PersistenceContext(unitName = "TareaScouts2PU")
-    private EntityManager em;
     
     /**
      * Creates a new instance of Login

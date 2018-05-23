@@ -41,7 +41,7 @@ public class SignIn {
     @Inject
     listaGrupos lgr;
     
- /*   @PersistenceContext(unitName = "TareaScouts2PU")
+ /*   @PersistenceContext(unitName = "TareaScouts3-PU")
     private EntityManager em;
   */
     public List<Grupo> groupList(){
