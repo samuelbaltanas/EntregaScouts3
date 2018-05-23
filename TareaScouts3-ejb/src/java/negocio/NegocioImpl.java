@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package negocio;
 
 import entidades.Documento;
@@ -12,6 +7,9 @@ import entidades.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -20,20 +18,33 @@ import javax.ejb.LocalBean;
 @Stateless
 @LocalBean
 public class NegocioImpl implements Negocio{
+    
+    @PersistenceContext(unitName = "TareaScouts3-PU")
+    private EntityManager em;
 
     @Override
     public void addEvento(Evento e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(e);
     }
 
     @Override
     public void setEvento(Evento e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       em.persist(e);
     }
 
     @Override
     public List<Evento> getEventos(Grupo g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        
+        List<Evento> res;
+        
+        Query q1 = em.createQuery("SELECT c FROM Evento c WHERE c.pertenece_a = ?1 ORDER BY C.fecha ASC");
+        q1.setParameter(1, g.getId());
+        
+        res = q1.getResultList();
+        
+        return res;
+        //return g.getLista_eventos();
     }
 
     @Override
