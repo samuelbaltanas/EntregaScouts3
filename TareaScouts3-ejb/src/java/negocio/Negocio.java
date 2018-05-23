@@ -6,13 +6,38 @@
 package negocio;
 
 
+import entidades.Documento;
+import entidades.Evento;
+import entidades.Grupo;
+import entidades.Usuario;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author francis
+ * @author samu
  */
 @Local
 public interface Negocio {
-    
+        //Eventos
+        public void addEvento(Evento e);
+        public void setEvento(Evento e);
+        public List<Evento> getEventos(Grupo g);
+        
+        public void apuntarse(Usuario user, Evento e);
+        public void quitarse(Usuario user, Evento e);
+        
+        //Usuarios
+        public List<Usuario> listaUsuarios();
+        public Usuario refrescarUsuario(Usuario user);
+        public void nuevoUsuario(Usuario user);
+        public void modificarUsuario(Usuario user);
+        
+        //Documentos
+        public List<Documento> listaDocumentos();
+        public List<Documento> documentosUser(Usuario usr);
+        public void modificarDocumento(Documento doc);
+        public void crearDocumento(Documento doc);
+        
+        
 }

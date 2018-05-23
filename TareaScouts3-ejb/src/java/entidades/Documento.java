@@ -38,7 +38,7 @@ public class Documento implements Serializable {
     @Column(name = "fecha_limite", nullable = false)
     private Date fecha_limite;
     @Column(name = "file", nullable = true)
-    private Part file;
+    private File file;
     
     @Column(name="nombre" , nullable= false , length=50)
     private String nombre;
@@ -144,14 +144,12 @@ public class Documento implements Serializable {
         this.nombre = nombre;
     }
 
-    public Part getFile() {
+    public File getFile() {
         return file;
     }
 
-    public void setFile(Part file) {
+    public void setFile(File file) {
         this.file = file;
     }
-    
-    
-    
+
 }
