@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>
+            <ui:insert name="title">Plantilla Scouts</ui:insert>
+        </title>
+    </h:head>
+
+    <h:body>
+        <div id="top" class="top">
+            <h:form id="menu">
+                <ul class="menulist">
+                    <li><h:commandLink rendered="#{empty controlAutorizacion.usuario}" action="index.xhtml" value="Login"/></li>
+                    
+                    <c:if  test ="#{!empty controlAutorizacion.usuario}" >
+                        <li><h:commandLink action="listaEventos.xhtml" value="Home"/></li>
+                        <li><h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" value="Datos personales"/></li>
+                        <li><h:commandLink action="#{accionDocumentos.documentos()}" value="Documentacion"/></li>
+                        <c:if test="#{controlAutorizacion.esScouter()}">
+                            <li><h:commandLink action="listaUsuarios.xhtml" value="Lista Educandos"/></li>
+                        </c:if>
+                        <li><h:commandLink action="#{controlAutorizacion.logout()}" value="Salir"/></li>
+                    </c:if>
+                </ul>
+            </h:form>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+    </h:body>
+
+</html>
+

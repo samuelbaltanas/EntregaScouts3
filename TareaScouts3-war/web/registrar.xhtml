@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+     <ui:define name="title">Registrate</ui:define>
+     <ui:define name="content">
+         <h:form id="sign_in">
+             <table>
+                 <tr>
+                    <td>Alias:</td>
+                    <td><h:inputText id="alias" value="#{signIn.user.alias}" required="true"/></td>
+                 </tr>
+                 <tr>
+                    <td>Contraseña:</td>
+                    <td><h:inputSecret id="contraseña" value="#{signIn.user.contraseña}" required="true"/></td>
+                 </tr>
+                 <tr>
+                     <td>Repetir contraseña: </td>
+                     <td><h:inputSecret id="re_contraseña" value="#{signIn.verify}" required="true"/></td>
+                 </tr>
+                 <tr>
+                    <td>Nombre:</td>
+                    <td><h:inputText id="nombre" value="#{signIn.user.nombre}" required="true"/></td>
+                 </tr>
+                 <tr>
+                    <td>Apellidos</td>
+                    <td><h:inputText id="apellidos" value="#{signIn.user.apellidos}" required="true"/></td>
+                 </tr>
+                 <tr>
+                    <td>DNI:</td>
+                    <td><h:inputText id="dni" value="#{signIn.user.dni}" required="true"/></td>
+                 </tr>
+                 <tr>
+                    <td>Fecha de nacimiento:</td>
+                    <td><h:inputText  id="fecha_nacimiento" value="#{signIn.user.fecha_nacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yy"/>
+                            <f:passThroughAttribute name="placeholder" value="dd/MM/yy"/>
+                        </h:inputText>
+                    </td>
+                 </tr>
+                 <tr>
+                    <td>Email:</td>
+                    <td><h:inputText id="email" value="#{signIn.user.email}" required="true"/></td>
+                 </tr>
+                 <tr>
+                    <td>Dirección</td>
+                    <td><h:inputText id="direccion" value="#{signIn.user.direccion}"/></td>
+                 </tr>
+                 <tr>
+                    <td>Localidad:</td>
+                    <td><h:inputText id="localidad" value="#{signIn.user.reside_en.nombre}"/></td>
+                 </tr>
+                 <tr>
+                    <td>Provincia</td>
+                    <td><h:inputText id="provincia" value="#{signIn.user.reside_en.provincia}"/></td>
+                 </tr>
+                 <tr>
+                    <td>Codigo postal:</td>
+                    <td><h:inputText id="postal" value="#{signIn.user.reside_en.codigo_postal}" >
+                           
+                            <f:convertNumber pattern="#00000"/>
+                        </h:inputText>
+                    </td>
+                 </tr>
+                 <tr>
+                    <td>Telefono:</td>
+                    <td><h:inputText id="telefono" value="#{signIn.user.telefono}"/></td>
+                 </tr>
+                 <tr>
+                     <td>Agrupación:</td>
+                     <td>
+                         <h:selectOneMenu id="grupo" value="#{signIn.gr}">                    
+                             <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
+                         </h:selectOneMenu>
+                     </td>
+                 </tr> 
+                 <tr>
+                     <td colspan="2">
+                        <h:commandButton value="Sign in" action="#{signIn.autenticar()}"/>
+                     </td>
+                 </tr>
+             </table>
+         </h:form>
+     </ui:define>
+</ui:composition>

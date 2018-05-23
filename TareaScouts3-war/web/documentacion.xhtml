@@ -1,0 +1,69 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"       
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="title">Documentación</ui:define>
+    <ui:define name="content">
+        
+        <h2>¡Hola <h:outputText value="#{controlAutorizacion.usuario.alias}"/>!</h2>
+
+                    <p>Documentación de los usuarios registrados.</p>
+                    <h:dataTable  value="#{pruebaDocumentos.documentos}" var="docs">
+                        <hr color="blue"/>
+                       
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dueño"></h:outputText>
+                        </f:facet>
+                            <h:outputText value="#{docs.dueño.alias}"></h:outputText>
+                       </h:column>
+                         
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Documento"></h:outputText>
+                        </f:facet>
+                            <h:outputText value="#{docs.nombre}"></h:outputText>
+                       </h:column>
+                        
+                        
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado"></h:outputText>
+                        </f:facet>
+                            <h:outputText
+                                          style="#{(docs.estado_documento == 'PENDIENTE_ENTREGA')? 'color:red': 'color:black'}" 
+                                          value="#{docs.estado_documento}">
+                            </h:outputText>
+                       </h:column>  
+                        
+                         <h:column>
+                        
+                             <h:form>
+                                 <h:commandButton rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" action="#{docs.setEstado_documento('CORRECTO')}" value=" Validar"/>
+                             </h:form>
+                         </h:column>
+                        
+                        
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha límite de la entrega"></h:outputText>
+                        </f:facet>
+                            <h:outputText  value="#{docs.fecha_limite}">
+                                <f:convertDateTime pattern="dd/MM/yy, hh:mm:ss"/>
+                            </h:outputText>
+                       </h:column> 
+                        
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha entregado"></h:outputText>
+                        </f:facet>
+                            <h:outputText value="#{docs.fecha_subida}">
+                                <f:convertDateTime pattern="dd/MM/yy, hh:mm:ss"/>
+                            </h:outputText>
+                       </h:column>
+                        
+                        </h:dataTable>
+    </ui:define>
+</ui:composition>

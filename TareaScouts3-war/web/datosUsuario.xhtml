@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">Datos</ui:define>
+    <ui:define name="content">
+     
+          
+               <h:outputText value="#{controlAutorizacion.usuario.alias}"/>
+               <h:form>
+                <fieldset>
+                    <legend>Datos personales</legend>
+                        Nombre <br/>
+                       
+                        <h:inputText   id="nombre" value="#{edicionUsuario.usuario.nombre}"  />
+                        <br/>
+                        Apellidos <br/>
+                     
+                        <h:inputText value="#{edicionUsuario.usuario.apellidos}"  />
+                        <br/>
+                        DNI <br/>
+                      
+                        <h:inputText  value="#{edicionUsuario.usuario.dni}"  />
+                        <br/>
+                        Fecha Nacimiento <br/>
+                      
+                        <h:inputText  value="#{edicionUsuario.usuario.fecha_nacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yy"/>
+                            <f:passThroughAttribute name="placeholder" value="dd/MM/yy"/>
+                        </h:inputText>
+                        <br/>
+                         Direccion <br/>
+                        
+                        <h:inputText  value="#{edicionUsuario.usuario.direccion}"  />
+                        <br/>
+                        Groupo <br/>
+                   
+     
+                        <h:selectOneMenu id="grupo" value="#{edicionUsuario.gr}">                    
+                             <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
+                         </h:selectOneMenu>
+     
+                        <br/>
+                        Telefono<br/>
+                     
+                        <h:inputText  value="#{edicionUsuario.usuario.telefono}"  />
+                        <br/>
+                        
+                        
+                </fieldset>
+                   <h:inputHidden value="#{edicionUsuario.usuario.alias}" />
+                   <h:commandButton value="Guardar" action="#{edicionUsuario.commit()}"/>
+             
+       </h:form>
+      
+    </ui:define>
+</ui:composition>

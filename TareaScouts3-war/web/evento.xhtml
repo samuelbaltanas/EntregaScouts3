@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">#{ creacionEdicionEvento.creacion ? 'Creación' : 'Edición'} de evento</ui:define>
+    <ui:define name="content">
+         <h1>Usuario SCOUTER</h1>
+                <p><h:outputText value="#{controlAutorizacion.usuario.alias}"/></p>
+                <h:panelGrid  columns = "2" border = "2" cellpadding = "10" cellspacing = "1">
+                <f:facet name = "header">
+                 <h:outputText value = "#{ creacionEdicionEvento.creacion ? 'Creación' : 'Edición'} de evento"/>
+                </f:facet>
+                    <h:form >
+              <h:outputLabel value = "Nombre" />
+              <h:inputText  value="#{creacionEdicionEvento.evento.nombre}" />
+              <br/>
+             <h:outputLabel value = "Fecha" />
+             <h:inputText  value="#{creacionEdicionEvento.evento.fecha}">
+                            <f:convertDateTime pattern="dd/MM/yy"/>
+                        </h:inputText>
+             <br/>
+              <h:outputLabel value = "Descripcion" />
+              <br/>
+              <h:inputTextarea  value="#{creacionEdicionEvento.evento.descripcion}"/>
+              <br/>
+              <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
+              <h:outputLabel value = "Grupos que participaran" />
+              <br/>
+              <h:selectManyCheckbox  value="#{creacionEdicionEvento.evento.pertenece_a}">
+                  
+                  <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g}" itemLabel="#{g.nombre}" />
+                              
+                 </h:selectManyCheckbox>
+           
+           
+   <h:commandButton type="submit" value ="Enviar" action="#{creacionEdicionEvento.commit(creacionEdicionEvento.evento)}"/>
+              </h:form>
+
+              </h:panelGrid>
+            
+    
+    </ui:define>
+</ui:composition>
+
+

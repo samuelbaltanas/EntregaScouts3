@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Página principal</ui:define>
+    <ui:define name="content">
+       <c:choose>
+           <c:when test="#{controlAutorizacion.esScouter()}">
+                <h1>Usuario SCOUTER</h1>
+                <p>¡¡Bienvenido <h:outputText value="#{controlAutorizacion.usuario.alias}"/>!!</p>
+                <tr>
+                    <h:form id="crear">
+                    <td colspan="2">
+                        <h:commandButton value="Crear Evento" action="#{creacionEdicionEvento.crear()}"/>
+                    </td>
+                    </h:form>
+                </tr>
+                <h1>Lista de eventos</h1>
+                <h:form id="editar">
+                <h:dataTable value="#{listaEventos.eventos}" var="evento">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{evento.nombre}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descripcion"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{evento.descripcion}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{evento.fecha}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton type="submit" value="Editar evento" action="#{creacionEdicionEvento.editar(evento.id)}"/>
+                    </h:column>                        
+                </h:dataTable>
+                    <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
+                </h:form>
+            </c:when>
+            <c:otherwise>
+                                   
+                <h1>Usuario EDUCANDO</h1>
+                <p>¡¡Bienvenido <h:outputText value="#{controlAutorizacion.usuario.alias}"/>!!</p>
+                
+                <h1>Lista de eventos</h1>
+                <h:form id="apuntar">
+                <h:dataTable value="#{listaEventos.eventos}" var="evento">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{evento.nombre}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descripcion"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{evento.descripcion}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{evento.fecha}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                       
+                            <h:commandButton value="Apuntarse" rendered="#{!accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.apuntarse(evento.id)}"/>
+                    
+                            <h:commandButton value="Quitarse" rendered="#{accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.quitarse(evento.id)}"/>
+                         
+                    </h:column>   
+                   
+                </h:dataTable>
+                </h:form>
+            </c:otherwise>
+        </c:choose>
+    </ui:define>
+</ui:composition>
+
+
