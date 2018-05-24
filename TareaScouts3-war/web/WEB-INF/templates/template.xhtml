@@ -13,6 +13,7 @@
         </title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!--<link rel="stylesheet" href="/resources/css/default.css"/>-->
 
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,13 +27,14 @@
 
     <h:body>
         <nav id="top" class="navbar navbar-default">
+
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">Scouts</a>
                 </div>
                 <h:form>
                     <ul class="nav navbar-nav">
-                        
+
                         <li id="evt-lnk">
                             <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" action="listaEventos.xhtml" >
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -61,36 +63,36 @@
                     <ul class="nav navbar-nav navbar-right" >
                         <c:choose>
                             <c:when test="#{!empty controlAutorizacion.usuario}">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <h:outputText value="#{controlAutorizacion.usuario.alias}" />
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        <h:outputText value="#{controlAutorizacion.usuario.alias}" />
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
 
-                                    <li id="usr-lnk">
-                                        <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" >
-                                            <span class="glyphicon glyphicon-user"></span>
-                                            Datos personales
-                                        </h:commandLink>
-                                    </li>
+                                        <li id="usr-lnk">
+                                            <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" >
+                                                <span class="glyphicon glyphicon-user"></span>
+                                                Datos personales
+                                            </h:commandLink>
+                                        </li>
 
-                                    <li id="out-lnk">
-                                        <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}">
-                                            <span class="glyphicon glyphicon-log-out"></span>
-                                            Salir
-                                        </h:commandLink>
-                                    </li>
-                                </ul>
+                                        <li id="out-lnk">
+                                            <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}">
+                                                <span class="glyphicon glyphicon-log-out"></span>
+                                                Salir
+                                            </h:commandLink>
+                                        </li>
+                                    </ul>
 
-                            </li>    
-                        </c:when>
+                                </li>    
+                            </c:when>
                             <c:otherwise>
                                 <li id="in-lnk">
-                                <h:commandLink role="menuitem" tabindex="-1" action="/">
-                                            <span class="glyphicon glyphicon-log-out"></span>
-                                            Login
-                                </h:commandLink>
+                                    <h:commandLink role="menuitem" tabindex="-1" action="/">
+                                        <span class="glyphicon glyphicon-log-out"></span>
+                                        Login
+                                    </h:commandLink>
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -100,6 +102,7 @@
 
                 </h:form>
             </div>
+
         </nav>
 
         <div id="content" class="container">
