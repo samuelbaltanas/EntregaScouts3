@@ -30,21 +30,22 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/index.xhtml">Scouts</a>
             </div>
-            
+                <h:form>
                <ul class="nav navbar-nav">
-                    <li><h:link rendered="#{empty controlAutorizacion.usuario}" outcome="index.xhtml" value="Login"/></li>
+                   <li><h:commandLink rendered="#{empty controlAutorizacion.usuario}" action="index.xhtml" value="Login"/></li>
                     
                     <c:if  test ="#{!empty controlAutorizacion.usuario}" >
-                        <li><h:link outcome="listaEventos.xhtml" value="Home"/></li>
-                        <li><h:link outcome="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" value="Datos personales"/></li>
-                        <li><h:link outcome="#{accionDocumentos.documentos()}" value="Documentacion"/></li>
+                        <li><h:commandLink action="listaEventos.xhtml" value="Home"/></li>
+                        <li><h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" value="Datos personales"/></li>
+                        <li><h:commandLink action="#{accionDocumentos.documentos()}" value="Documentacion"/></li>
                         <c:if test="#{controlAutorizacion.esScouter()}">
-                            <li><h:link outcome="listaUsuarios.xhtml" value="Lista Educandos"/></li>
+                            <li><h:commandLink action="listaUsuarios.xhtml" value="Lista Educandos"/></li>
                         </c:if>
-                        <li><h:link  outcome="#{controlAutorizacion.logout()}" value="Salir"/></li>
+                        <li><h:commandLink  action="#{controlAutorizacion.logout()}" value="Salir"/></li>
                     </c:if>
                     
                 </ul>
+            </h:form>
             </div>
         </nav>
 
