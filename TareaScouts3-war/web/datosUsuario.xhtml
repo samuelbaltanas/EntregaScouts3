@@ -10,54 +10,62 @@
 
     <ui:define name="title">Datos</ui:define>
     <ui:define name="content">
-     
-          
-               <h:outputText value="#{controlAutorizacion.usuario.alias}"/>
-               <h:form>
-                <fieldset>
-                    <legend>Datos personales</legend>
-                        Nombre <br/>
-                       
-                        <h:inputText   id="nombre" value="#{edicionUsuario.usuario.nombre}"  />
-                        <br/>
-                        Apellidos <br/>
-                     
-                        <h:inputText value="#{edicionUsuario.usuario.apellidos}"  />
-                        <br/>
-                        DNI <br/>
-                      
-                        <h:inputText  value="#{edicionUsuario.usuario.dni}"  />
-                        <br/>
-                        Fecha Nacimiento <br/>
-                      
-                        <h:inputText  value="#{edicionUsuario.usuario.fecha_nacimiento}">
-                            <f:convertDateTime pattern="dd/MM/yy"/>
-                            <f:passThroughAttribute name="placeholder" value="dd/MM/yy"/>
-                        </h:inputText>
-                        <br/>
-                         Direccion <br/>
-                        
-                        <h:inputText  value="#{edicionUsuario.usuario.direccion}"  />
-                        <br/>
-                        Groupo <br/>
-                   
-     
-                        <h:selectOneMenu id="grupo" value="#{edicionUsuario.gr}">                    
-                             <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
-                         </h:selectOneMenu>
-     
-                        <br/>
-                        Telefono<br/>
-                     
-                        <h:inputText  value="#{edicionUsuario.usuario.telefono}"  />
-                        <br/>
-                        
-                        
-                </fieldset>
-                   <h:inputHidden value="#{edicionUsuario.usuario.alias}" />
-                   <h:commandButton value="Guardar" action="#{edicionUsuario.commit()}"/>
-             
-       </h:form>
-      
+        
+        <div class="page-header">
+            <h1>Datos personales</h1>
+        </div>
+        
+        <h:form>
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <h:inputText id="nombre" class="form-control" value="#{edicionUsuario.usuario.nombre}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <h:inputText id="apellidos" class="form-control" value="#{edicionUsuario.usuario.apellidos}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="dni">DNI</label>
+                <h:inputText id="dni" class="form-control" value="#{edicionUsuario.usuario.dni}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                <h:inputText id="fecha_nacimiento" 
+                             class="form-control" 
+                             value="#{edicionUsuario.usuario.fecha_nacimiento}">
+                    <f:convertDateTime pattern="dd/MM/yy"/>
+                    <f:passThroughAttribute name="placeholder" value="dd/MM/yy"/>
+                </h:inputText>
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Direccion</label>
+                <h:inputText id="direccion" class="form-control" value="#{edicionUsuario.usuario.direccion}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="grupo">Grupo</label>
+                <h:selectOneMenu class="form-control" id="grupo" value="#{edicionUsuario.gr}">                    
+                    <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Telefono</label>
+                <h:inputText id="telefono" class="form-control" value="#{edicionUsuario.usuario.telefono}"/>
+            </div>
+
+
+            <h:inputHidden value="#{edicionUsuario.usuario.alias}" />
+            <h:commandButton value="Guardar" action="#{edicionUsuario.commit()}"/>
+
+        </h:form>
+        <script>
+            $("#usr-lnk").attr("class", "active");
+        </script>
     </ui:define>
 </ui:composition>

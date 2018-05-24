@@ -32,35 +32,35 @@
                 </div>
                 <h:form>
                     <ul class="nav navbar-nav">
-                        <li><h:commandLink rendered="#{empty controlAutorizacion.usuario}" action="index.xhtml" value="Login"/></li>
-
                         
-                            <li>
-                                <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" action="listaEventos.xhtml" >
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                    Eventos
-                                </h:commandLink>
-                            </li>
+                        <li id="evt-lnk">
+                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" action="listaEventos.xhtml" >
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                Eventos
+                            </h:commandLink>
+                        </li>
 
-                            <li >
-                                <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" role="menuitem" tabindex="-1" action="#{accionDocumentos.documentos()}">
-                                    <span class="glyphicon glyphicon-file"></span>
-                                    Documentacion
-                                </h:commandLink>
-                            </li>
+                        <li id="doc-lnk">
+                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" role="menuitem" tabindex="-1" action="#{accionDocumentos.documentos()}">
+                                <span class="glyphicon glyphicon-file"></span>
+                                Documentacion
+                            </h:commandLink>
+                        </li>
 
 
-                            
-                                <li>
-                                    <h:commandLink  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" role="menuitem" tabindex="-1" action="listaUsuarios.xhtml">
-                                    <span class="glyphicon glyphicon-list"></span>
-                                    Lista Educandos
-                                    </h:commandLink>
-                                </li>
-                           
-                            
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right" rendered="#{!empty controlAutorizacion.usuario}">
+
+                        <li id="lst-lnk">
+                            <h:commandLink  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" role="menuitem" tabindex="-1" action="listaUsuarios.xhtml">
+                                <span class="glyphicon glyphicon-list"></span>
+                                Lista Educandos
+                            </h:commandLink>
+                        </li>
+
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" >
+                        <c:choose>
+                            <c:when test="#{!empty controlAutorizacion.usuario}">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <span class="glyphicon glyphicon-user"></span>
@@ -68,14 +68,14 @@
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
 
-                                    <li>
+                                    <li id="usr-lnk">
                                         <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" >
                                             <span class="glyphicon glyphicon-user"></span>
                                             Datos personales
                                         </h:commandLink>
                                     </li>
 
-                                    <li>
+                                    <li id="out-lnk">
                                         <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}">
                                             <span class="glyphicon glyphicon-log-out"></span>
                                             Salir
@@ -84,11 +84,20 @@
                                 </ul>
 
                             </li>    
+                        </c:when>
+                            <c:otherwise>
+                                <li id="in-lnk">
+                                <h:commandLink role="menuitem" tabindex="-1" action="/">
+                                            <span class="glyphicon glyphicon-log-out"></span>
+                                            Login
+                                </h:commandLink>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
 
-                            </ul>
 
 
-                    
                 </h:form>
             </div>
         </nav>

@@ -9,60 +9,64 @@
 
     <ui:define name="title">Listado de usuarios</ui:define>
     <ui:define name="content">
-       
-   <!--
-        <h3>Busqueda de usuario</h3>
- 
-               <h:form action="" method="post">
-                    Escribe el dni del usuario:
-                    <h:inputText  value= ""  />
-                    <h:commandButton value="Buscar" action="#{listaUsuario.buscar(dni)}"/>
-                </h:form>-->
-        <h1>Listado de usuarios</h1>
-                <h:form> 
-                <h:dataTable value="#{listaUsuarios.usuarios}" var="usuario">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nombre"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{usuario.nombre}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="apellido"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{usuario.apellidos}"></h:outputText>
-                    </h:column>
-                     <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="alia"></h:outputText>
-                        </f:facet>
-                         <h:outputText value="#{usuario.alias}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="dni"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{usuario.dni}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="email"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{usuario.email}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="telefono"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{usuario.telefono}"></h:outputText>
-                    </h:column>
-                   <!-- <h:column>
-                        <h:commandLink value="Documentación" action="documentacion.xhtml"/>
-                    </h:column> -->
-                                            
-                </h:dataTable>
-            </h:form>
+
+        <!--
+             <h3>Busqueda de usuario</h3>
+      
+                    <h:form action="" method="post">
+                         Escribe el dni del usuario:
+                         <h:inputText  value= ""  />
+                         <h:commandButton value="Buscar" action="#{listaUsuario.buscar(dni)}"/>
+                     </h:form>-->
+        <div class="page-header">
+            <h1>Listado de usuarios</h1>
+        </div>
+
+        <h:dataTable value="#{listaUsuarios.usuarios}" var="usuario" class="table">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Nombre"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{usuario.nombre}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Apellido"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{usuario.apellidos}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Alias"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{usuario.alias}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="DNI"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{usuario.dni}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Email"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{usuario.email}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Telefono"></h:outputText>
+                </f:facet>
+                <h:outputText value="#{usuario.telefono}"></h:outputText>
+            </h:column>
+            <!-- <h:column>
+                 <h:commandLink value="Documentación" action="documentacion.xhtml"/>
+             </h:column> -->
+
+        </h:dataTable>
+
+        <script>
+            $("#lst-lnk").attr("class", "active");
+        </script>
     </ui:define>
 </ui:composition>
-    

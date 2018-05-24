@@ -9,41 +9,55 @@
 
     <ui:define name="title">#{ creacionEdicionEvento.creacion ? 'Creación' : 'Edición'} de evento</ui:define>
     <ui:define name="content">
-         <h1>Usuario SCOUTER</h1>
-                <p><h:outputText value="#{controlAutorizacion.usuario.alias}"/></p>
-                <h:panelGrid  columns = "2" border = "2" cellpadding = "10" cellspacing = "1">
-                <f:facet name = "header">
-                 <h:outputText value = "#{ creacionEdicionEvento.creacion ? 'Creación' : 'Edición'} de evento"/>
-                </f:facet>
-                    <h:form >
-              <h:outputLabel value = "Nombre" />
-              <h:inputText  value="#{creacionEdicionEvento.evento.nombre}" />
-              <br/>
-             <h:outputLabel value = "Fecha" />
-             <h:inputText  value="#{creacionEdicionEvento.evento.fecha}">
-                            <f:convertDateTime pattern="dd/MM/yy"/>
-                        </h:inputText>
-             <br/>
-              <h:outputLabel value = "Descripcion" />
-              <br/>
-              <h:inputTextarea  value="#{creacionEdicionEvento.evento.descripcion}"/>
-              <br/>
-              <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
-              <h:outputLabel value = "Grupos que participaran" />
-              <br/>
-              <h:selectManyCheckbox  value="#{creacionEdicionEvento.evento.pertenece_a}">
-                  
-                  <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g}" itemLabel="#{g.nombre}" />
-                              
-                 </h:selectManyCheckbox>
-           
-           
-   <h:commandButton type="submit" value ="Enviar" action="#{creacionEdicionEvento.commit(creacionEdicionEvento.evento)}"/>
-              </h:form>
 
-              </h:panelGrid>
-            
-    
+        <c:choose>
+            <c:when test="#{creacionEdicionEvento.creacion}">
+                <div class="page-header">
+                    <h1>Nuevo evento</h1>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page-header">
+                    <h1>Edición de #{creacionEdicionEvento.evento.nombre}</h1>
+                </div>
+            </c:otherwise>
+        </c:choose> 
+
+        <h:form>
+            <div class="form-group">
+                <h:outputLabel for="nombre" value = "Nombre" />
+                <h:inputText id="nombre" class="form-control" value="#{creacionEdicionEvento.evento.nombre}" />
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="fecha" value = "Fecha" />
+                <h:inputText id="fecha" class="form-control" value="#{creacionEdicionEvento.evento.fecha}">
+                    <f:convertDateTime pattern="dd/MM/yy"/>
+                </h:inputText>
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="desc" value = "Descripcion" />
+                <h:inputTextarea id="desc" class="form-control" value="#{creacionEdicionEvento.evento.descripcion}" />
+            </div>
+
+            <div class="form-group">
+                <h:outputLabel for="grp" value = "Grupos que participaran" />
+
+                <div>
+                    <h:selectManyCheckbox id="grp" value="#{creacionEdicionEvento.evento.pertenece_a}">
+
+                        <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g}" itemLabel="#{g.nombre}" />
+
+                    </h:selectManyCheckbox>
+                </div>
+            </div>
+
+            <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
+
+            <h:commandButton type="submit" value ="Enviar" action="#{creacionEdicionEvento.commit(creacionEdicionEvento.evento)}"/>
+        </h:form>
+
     </ui:define>
 </ui:composition>
 

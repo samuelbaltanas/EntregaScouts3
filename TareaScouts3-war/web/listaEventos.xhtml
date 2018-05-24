@@ -9,8 +9,9 @@
 
     <ui:define name="title">Página principal</ui:define>
     <ui:define name="content">
-
-        <h1>Lista de eventos</h1>
+        <div class="page-header">
+            <h1>Lista de eventos</h1>
+        </div>
         <h:form id="evt">
             <h:dataTable class="table" value="#{listaEventos.eventos}" var="evento">
                 <h:column>
@@ -52,7 +53,9 @@
                              value="Crear Evento" 
                              action="#{creacionEdicionEvento.crear()}"/>
         </h:form>
-
+        <script>
+            $("#evt-lnk").attr("class", "active");
+        </script>
     </ui:define>
 </ui:composition>
 

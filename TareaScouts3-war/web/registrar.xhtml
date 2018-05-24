@@ -7,84 +7,164 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-     <ui:define name="title">Registrate</ui:define>
-     <ui:define name="content">
-         <h:form id="sign_in">
-             <table>
-                 <tr>
-                    <td>Alias:</td>
-                    <td><h:inputText id="alias" value="#{signIn.user.alias}" required="true"/></td>
-                 </tr>
-                 <tr>
-                    <td>Contraseña:</td>
-                    <td><h:inputSecret id="contraseña" value="#{signIn.user.contraseña}" required="true"/></td>
-                 </tr>
-                 <tr>
-                     <td>Repetir contraseña: </td>
-                     <td><h:inputSecret id="re_contraseña" value="#{signIn.verify}" required="true"/></td>
-                 </tr>
-                 <tr>
-                    <td>Nombre:</td>
-                    <td><h:inputText id="nombre" value="#{signIn.user.nombre}" required="true"/></td>
-                 </tr>
-                 <tr>
-                    <td>Apellidos</td>
-                    <td><h:inputText id="apellidos" value="#{signIn.user.apellidos}" required="true"/></td>
-                 </tr>
-                 <tr>
-                    <td>DNI:</td>
-                    <td><h:inputText id="dni" value="#{signIn.user.dni}" required="true"/></td>
-                 </tr>
-                 <tr>
-                    <td>Fecha de nacimiento:</td>
-                    <td><h:inputText  id="fecha_nacimiento" value="#{signIn.user.fecha_nacimiento}">
+    <ui:define name="title">Registrate</ui:define>
+    <ui:define name="content">
+
+        <div class="container">
+
+            <h:form id="sign_in" class="form-horizontal">
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="usuario">Alias:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="alias" value="#{signIn.user.alias}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="alias"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="contraseña">Contraseña:</label>
+                    <div class="col-sm-4">
+                        <h:inputSecret class="form-control"  id="contraseña" value="#{signIn.user.contraseña}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="contraseña"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="re_contraseña">Repetir contraseña: </label>
+                    <div class="col-sm-4">
+                        <h:inputSecret class="form-control" id="re_contraseña" value="#{signIn.verify}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="re_contraseña"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="nombre">Nombre:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="nombre" value="#{signIn.user.nombre}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="nombre"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="apellidos">Apellidos:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="apellidos" value="#{signIn.user.apellidos}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="apellidos"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="dni">DNI:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="dni" value="#{signIn.user.dni}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="dni"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="fecha_nacimiento">Fecha de nacimiento:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="fecha_nacimiento" value="#{signIn.user.fecha_nacimiento}" required="true">
                             <f:convertDateTime pattern="dd/MM/yy"/>
                             <f:passThroughAttribute name="placeholder" value="dd/MM/yy"/>
                         </h:inputText>
-                    </td>
-                 </tr>
-                 <tr>
-                    <td>Email:</td>
-                    <td><h:inputText id="email" value="#{signIn.user.email}" required="true"/></td>
-                 </tr>
-                 <tr>
-                    <td>Dirección</td>
-                    <td><h:inputText id="direccion" value="#{signIn.user.direccion}"/></td>
-                 </tr>
-                 <tr>
-                    <td>Localidad:</td>
-                    <td><h:inputText id="localidad" value="#{signIn.user.reside_en.nombre}"/></td>
-                 </tr>
-                 <tr>
-                    <td>Provincia</td>
-                    <td><h:inputText id="provincia" value="#{signIn.user.reside_en.provincia}"/></td>
-                 </tr>
-                 <tr>
-                    <td>Codigo postal:</td>
-                    <td><h:inputText id="postal" value="#{signIn.user.reside_en.codigo_postal}" >
-                           
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="fecha_nacimiento"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="email">Email:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="email" value="#{signIn.user.email}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="email"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="direccion">Dirección:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="direccion" value="#{signIn.user.direccion}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="direccion"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="localidad">Localidad:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="localidad" value="#{signIn.user.reside_en.nombre}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="localidad"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="provincia">Provincia:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="provincia" value="#{signIn.user.reside_en.provincia}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="provincia"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="codigo_postal">Codigo postal:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="codigo_postal" value="#{signIn.user.reside_en.codigo_postal}" required="true">
                             <f:convertNumber pattern="#00000"/>
                         </h:inputText>
-                    </td>
-                 </tr>
-                 <tr>
-                    <td>Telefono:</td>
-                    <td><h:inputText id="telefono" value="#{signIn.user.telefono}"/></td>
-                 </tr>
-                 <tr>
-                     <td>Agrupación:</td>
-                     <td>
-                         <h:selectOneMenu id="grupo" value="#{signIn.gr}">                    
-                             <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
-                         </h:selectOneMenu>
-                     </td>
-                 </tr> 
-                 <tr>
-                     <td colspan="2">
-                        <h:commandButton value="Sign in" action="#{signIn.autenticar()}"/>
-                     </td>
-                 </tr>
-             </table>
-         </h:form>
-     </ui:define>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="codigo_postal"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="telefono">Telefono:</label>
+                    <div class="col-sm-4">
+                        <h:inputText class="form-control" id="telefono" value="#{signIn.user.telefono}" required="true"/>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="telefono"/>
+                    </span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="grupo">Agrupación:</label>
+                    <div class="col-sm-4">
+                        <h:selectOneMenu id="grupo" value="#{signIn.gr}">                    
+                            <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <span class="col-sm-6">
+                        <h:message styleClass="alert alert-danger" role="error" for="grupo"/>
+                    </span>
+                </div>
+
+                <div class="col-sm-offset-2 col-sm-4">
+                    <h:commandButton class="btn btn-default" value="Sign in" action="#{signIn.autenticar()}"/>
+                </div>
+
+            </h:form>
+        </div>
+    </ui:define>
 </ui:composition>
