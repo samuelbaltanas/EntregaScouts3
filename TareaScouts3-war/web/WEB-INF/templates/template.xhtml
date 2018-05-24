@@ -4,14 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-   <h:head>
+    <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   <!--     <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" /> -->
+        <!--     <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+             <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" /> -->
         <title>
             <ui:insert name="title">Plantilla Scouts</ui:insert>
         </title>
-         <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
         <!-- jQuery library -->
@@ -19,7 +19,7 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     </h:head>
@@ -27,25 +27,69 @@
     <h:body>
         <nav id="top" class="navbar navbar-default">
             <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/index.xhtml">Scouts</a>
-            </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Scouts</a>
+                </div>
                 <h:form>
-               <ul class="nav navbar-nav">
-                   <li><h:commandLink rendered="#{empty controlAutorizacion.usuario}" action="index.xhtml" value="Login"/></li>
+                    <ul class="nav navbar-nav">
+                        <li><h:commandLink rendered="#{empty controlAutorizacion.usuario}" action="index.xhtml" value="Login"/></li>
+
+                        
+                            <li>
+                                <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" action="listaEventos.xhtml" >
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    Eventos
+                                </h:commandLink>
+                            </li>
+
+                            <li >
+                                <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" role="menuitem" tabindex="-1" action="#{accionDocumentos.documentos()}">
+                                    <span class="glyphicon glyphicon-file"></span>
+                                    Documentacion
+                                </h:commandLink>
+                            </li>
+
+
+                            
+                                <li>
+                                    <h:commandLink  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" role="menuitem" tabindex="-1" action="listaUsuarios.xhtml">
+                                    <span class="glyphicon glyphicon-list"></span>
+                                    Lista Educandos
+                                    </h:commandLink>
+                                </li>
+                           
+                            
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right" rendered="#{!empty controlAutorizacion.usuario}">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <h:outputText value="#{controlAutorizacion.usuario.alias}" />
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" >
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            Datos personales
+                                        </h:commandLink>
+                                    </li>
+
+                                    <li>
+                                        <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}">
+                                            <span class="glyphicon glyphicon-log-out"></span>
+                                            Salir
+                                        </h:commandLink>
+                                    </li>
+                                </ul>
+
+                            </li>    
+
+                            </ul>
+
+
                     
-                    <c:if  test ="#{!empty controlAutorizacion.usuario}" >
-                        <li><h:commandLink action="listaEventos.xhtml" value="Home"/></li>
-                        <li><h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" value="Datos personales"/></li>
-                        <li><h:commandLink action="#{accionDocumentos.documentos()}" value="Documentacion"/></li>
-                        <c:if test="#{controlAutorizacion.esScouter()}">
-                            <li><h:commandLink action="listaUsuarios.xhtml" value="Lista Educandos"/></li>
-                        </c:if>
-                        <li><h:commandLink  action="#{controlAutorizacion.logout()}" value="Salir"/></li>
-                    </c:if>
-                    
-                </ul>
-            </h:form>
+                </h:form>
             </div>
         </nav>
 
