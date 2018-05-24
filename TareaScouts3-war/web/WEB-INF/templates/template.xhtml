@@ -6,33 +6,49 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
    <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+   <!--     <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" /> -->
         <title>
             <ui:insert name="title">Plantilla Scouts</ui:insert>
         </title>
+         <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     </h:head>
 
     <h:body>
-        <div id="top" class="top">
-            <h:form id="menu">
-                <ul class="menulist">
-                    <li><h:commandLink rendered="#{empty controlAutorizacion.usuario}" action="index.xhtml" value="Login"/></li>
+        <nav id="top" class="navbar navbar-default">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.xhtml">Scouts</a>
+            </div>
+            
+               <ul class="nav navbar-nav">
+                    <li><h:link rendered="#{empty controlAutorizacion.usuario}" outcome="index.xhtml" value="Login"/></li>
                     
                     <c:if  test ="#{!empty controlAutorizacion.usuario}" >
-                        <li><h:commandLink action="listaEventos.xhtml" value="Home"/></li>
-                        <li><h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" value="Datos personales"/></li>
-                        <li><h:commandLink action="#{accionDocumentos.documentos()}" value="Documentacion"/></li>
+                        <li><h:link outcome="listaEventos.xhtml" value="Home"/></li>
+                        <li><h:link outcome="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" value="Datos personales"/></li>
+                        <li><h:link outcome="#{accionDocumentos.documentos()}" value="Documentacion"/></li>
                         <c:if test="#{controlAutorizacion.esScouter()}">
-                            <li><h:commandLink action="listaUsuarios.xhtml" value="Lista Educandos"/></li>
+                            <li><h:link outcome="listaUsuarios.xhtml" value="Lista Educandos"/></li>
                         </c:if>
-                        <li><h:commandLink action="#{controlAutorizacion.logout()}" value="Salir"/></li>
+                        <li><h:link  outcome="#{controlAutorizacion.logout()}" value="Salir"/></li>
                     </c:if>
+                    
                 </ul>
-            </h:form>
-        </div>
+            </div>
+        </nav>
 
-        <div id="content" class="center_content">
+        <div id="content" class="container">
             <ui:insert name="content">Content</ui:insert>
         </div>
     </h:body>
