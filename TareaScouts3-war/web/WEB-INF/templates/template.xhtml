@@ -6,108 +6,130 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <!--     <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-             <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" /> -->
         <title>
             <ui:insert name="title">Plantilla Scouts</ui:insert>
         </title>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <!--<link rel="stylesheet" href="/resources/css/default.css"/>-->
 
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/resources/css/test.css"/>
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> 
+
 
     </h:head>
 
     <h:body>
-        <nav id="top" class="navbar navbar-default">
 
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Scouts</a>
-                </div>
-                <h:form>
-                    <ul class="nav navbar-nav">
+        <nav  class="navbar navbar-expand-lg bg-dark navbar-dark">
 
-                        <li id="evt-lnk">
-                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" action="listaEventos.xhtml" >
+
+            <a class="navbar-brand" href="index.xhtml">Scouts</a>
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div id="navbarNavDropdown" class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" id="evt-lnk">
+                        <h:form>
+                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}"
+                                           action="listaEventos.xhtml" class="nav-link">
                                 <span class="glyphicon glyphicon-calendar"></span>
                                 Eventos
                             </h:commandLink>
-                        </li>
+                        </h:form>
+                    </li>
 
-                        <li id="doc-lnk">
-                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" role="menuitem" tabindex="-1" action="#{accionDocumentos.documentos()}">
-                                <span class="glyphicon glyphicon-file"></span>
+                    <li class="nav-item" id="doc-lnk">
+                        <h:form>
+                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" 
+                                           role="menuitem" tabindex="-1" 
+                                           action="#{accionDocumentos.documentos()}" class="nav-link">
+
                                 Documentacion
                             </h:commandLink>
-                        </li>
+                        </h:form>
+                    </li>
 
+                    <li class="nav-item" id="lst-lnk">
+                        <h:link  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" 
+                                 role="menuitem" tabindex="-1" 
+                                 outcome="listaUsuarios.xhtml" class="nav-link">
+                            <span class="glyphicon glyphicon-list"></span>
+                            Lista Educandos
+                        </h:link>
+                    </li>
+                </ul>
 
-
-                        <li id="lst-lnk">
-                            <h:commandLink  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" role="menuitem" tabindex="-1" action="listaUsuarios.xhtml">
-                                <span class="glyphicon glyphicon-list"></span>
-                                Lista Educandos
-                            </h:commandLink>
-                        </li>
-
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right" >
+                <ul class="navbar-nav justify-content-end">
+                    <h:form class="form-inline">
                         <c:choose>
                             <c:when test="#{!empty controlAutorizacion.usuario}">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                <li class="nav-item dropdown">
+
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                                         <span class="glyphicon glyphicon-user"></span>
                                         <h:outputText value="#{controlAutorizacion.usuario.alias}" />
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
+                                        <span class="caret"></span>
+                                    </a>
 
-                                        <li id="usr-lnk">
-                                            <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" >
+                                    <div class="dropdown-menu dropdown-menu-right">
+
+                                        <h:form>
+
+                                            <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" 
+                                                           class="dropdown-item" id="usr-lnk">
                                                 <span class="glyphicon glyphicon-user"></span>
                                                 Datos personales
                                             </h:commandLink>
-                                        </li>
+                                        </h:form>
 
-                                        <li id="out-lnk">
-                                            <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}">
+                                        <h:form>
+                                            <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}"
+                                                           class="dropdown-item" id="out-lnk">
                                                 <span class="glyphicon glyphicon-log-out"></span>
                                                 Salir
                                             </h:commandLink>
-                                        </li>
-                                    </ul>
+                                        </h:form>
+
+
+                                    </div>
 
                                 </li>    
                             </c:when>
                             <c:otherwise>
-                                <li id="in-lnk">
-                                    <h:commandLink role="menuitem" tabindex="-1" action="/">
+                                <li class="nav-item" id="in-lnk">
+                                    <h:link role="menuitem" tabindex="-1" 
+                                            outcome="index.xhtml" class="nav-link">
                                         <span class="glyphicon glyphicon-log-out"></span>
                                         Login
-                                    </h:commandLink>
+                                    </h:link>
                                 </li>
                             </c:otherwise>
                         </c:choose>
-                    </ul>
+                    </h:form>
+                </ul>
 
-
-
-                </h:form>
             </div>
+
 
         </nav>
 
-        <div id="content" class="container">
-            <ui:insert name="content">Content</ui:insert>
-        </div>
+        <ui:insert name="content">Content</ui:insert>
+
     </h:body>
 
 </html>

@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/TareaScouts3/*</url-pattern>
+        <url-pattern>/TareaScouts/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,6 +19,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>TareaScouts3/index.xhtml</welcome-file>
+        <welcome-file>/TareaScouts/index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
