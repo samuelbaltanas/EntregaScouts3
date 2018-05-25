@@ -66,13 +66,14 @@
                 <h:form>
                     <h:commandButton rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" 
                                      action="#{docs.setEstado_documento('CORRECTO')}" 
-                                     value=" Validar"/>
+                                     value=" Validar"
+                                     class="btn btn-dark"/>
                 </h:form>
             </h:column>
 
         </h:dataTable>
         <script>
-            $("#doc-lnk").attr("class", "active");
+            $("#doc-lnk").attr("class", "nav-item active");
         </script>
     </ui:define>
 </ui:composition>

@@ -20,12 +20,12 @@
                             <br/>
                             <h:inputFile required="true" value="#{accionDocumentos.file}"/>
                             
-                            <h:commandButton value="Subir" action="#{accionDocumentos.save(doc.id)}"/>                            
+                            <h:commandButton value="Subir" class="btn btn-dark" action="#{accionDocumentos.save(doc.id)}"/>                            
                         </h:form>
                         <br/>
         </c:forEach>
         <script>
-            $("#doc-lnk").attr("class","active");
+            $("#doc-lnk").attr("class","nav-item active");
         </script>
       </ui:define>
 </ui:composition>

@@ -33,14 +33,14 @@
                     <h:outputText value="#{evento.fecha}"></h:outputText>
                 </h:column>
                 <h:column>
-                    <h:commandButton rendered="#{controlAutorizacion.esScouter()}" type="submit" value="Editar evento" action="#{creacionEdicionEvento.editar(evento.id)}"/>
+                    <h:commandButton rendered="#{controlAutorizacion.esScouter()}" class="btn btn-dark" type="submit" value="Editar evento" action="#{creacionEdicionEvento.editar(evento.id)}"/>
 
                 </h:column>
                 <h:column>
 
-                    <h:commandButton value="Apuntarse" rendered="#{!controlAutorizacion.esScouter() and !accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.apuntarse(evento.id)}"/>
+                    <h:commandButton value="Apuntarse" class="btn btn-dark" rendered="#{!controlAutorizacion.esScouter() and !accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.apuntarse(evento.id)}"/>
 
-                    <h:commandButton value="Quitarse" rendered="#{!controlAutorizacion.esScouter() and accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.quitarse(evento.id)}"/>
+                    <h:commandButton value="Quitarse" class="btn btn-dark" rendered="#{!controlAutorizacion.esScouter() and accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.quitarse(evento.id)}"/>
 
                 </h:column>                         
             </h:dataTable>
@@ -49,12 +49,12 @@
         <h:form id="crear">
             <h:commandButton type="submit"
                              rendered="#{controlAutorizacion.esScouter()}"
-                             class="btn btn-default" 
+                             class="btn btn-dark" 
                              value="Crear Evento" 
                              action="#{creacionEdicionEvento.crear()}"/>
         </h:form>
         <script>
-            $("#evt-lnk").attr("class", "active");
+            $("#evt-lnk").attr("class", "nav-item active");
         </script>
     </ui:define>
 </ui:composition>

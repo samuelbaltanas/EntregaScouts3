@@ -29,10 +29,10 @@
 
     <h:body>
 
-        <nav  class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <nav  class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 
-            <a class="navbar-brand" href="index.xhtml">Scouts</a>
+            <a class="navbar-brand mr-0 mr-md-2" href="index.xhtml">Scouts</a>
 
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,28 +41,30 @@
 
 
             <div id="navbarNavDropdown" class="navbar-collapse collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" id="evt-lnk">
-                        <h:form>
+                <ul class="navbar-nav mr-auto">
+                    <h:form class="form-inline">
+                        <li class="nav-item" id="evt-lnk">
+
                             <h:commandLink rendered="#{!empty controlAutorizacion.usuario}"
                                            action="listaEventos.xhtml" class="nav-link">
                                 <span class="glyphicon glyphicon-calendar"></span>
                                 Eventos
                             </h:commandLink>
-                        </h:form>
-                    </li>
 
-                    <li class="nav-item" id="doc-lnk">
-                        <h:form>
-                            <h:commandLink rendered="#{!empty controlAutorizacion.usuario}" 
-                                           role="menuitem" tabindex="-1" 
-                                           action="#{accionDocumentos.documentos()}" class="nav-link">
+                        </li>
+                    </h:form>
+                    <h:form class="form-inline">
+                        <li class="nav-item" id="doc-lnk">
+
+                            <h:commandLink  rendered="#{!empty controlAutorizacion.usuario}" 
+                                            role="menuitem" tabindex="-1" 
+                                            action="#{accionDocumentos.documentos()}" class="nav-link">
 
                                 Documentacion
                             </h:commandLink>
-                        </h:form>
-                    </li>
 
+                        </li>
+                    </h:form>
                     <li class="nav-item" id="lst-lnk">
                         <h:link  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" 
                                  role="menuitem" tabindex="-1" 
@@ -73,63 +75,63 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav justify-content-end">
-                    <h:form class="form-inline">
-                        <c:choose>
-                            <c:when test="#{!empty controlAutorizacion.usuario}">
 
-                                <li class="nav-item dropdown">
+                <ul class="navbar-nav my-2">
+                    <c:choose>
+                        <c:when test="#{!empty controlAutorizacion.usuario}">
 
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <span class="glyphicon glyphicon-user"></span>
-                                        <h:outputText value="#{controlAutorizacion.usuario.alias}" />
-                                        <span class="caret"></span>
-                                    </a>
+                            <li class="nav-item dropdown">
 
-                                    <div class="dropdown-menu dropdown-menu-right">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <h:outputText value="#{controlAutorizacion.usuario.alias}" />
+                                    <span class="caret"></span>
+                                </a>
 
-                                        <h:form>
+                                <div class="dropdown-menu dropdown-menu-right">
 
-                                            <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" 
-                                                           class="dropdown-item" id="usr-lnk">
-                                                <span class="glyphicon glyphicon-user"></span>
-                                                Datos personales
-                                            </h:commandLink>
-                                        </h:form>
+                                    <h:form class="form-inline">
 
-                                        <h:form>
-                                            <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}"
-                                                           class="dropdown-item" id="out-lnk">
-                                                <span class="glyphicon glyphicon-log-out"></span>
-                                                Salir
-                                            </h:commandLink>
-                                        </h:form>
+                                        <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" 
+                                                       class="dropdown-item" id="usr-lnk">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            Datos personales
+                                        </h:commandLink>
 
+                                    </h:form>
 
-                                    </div>
+                                    <h:form class="form-inline">
+                                        <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}"
+                                                       class="dropdown-item" id="out-lnk">
+                                            <span class="glyphicon glyphicon-log-out"></span>
+                                            Salir
+                                        </h:commandLink>
+                                    </h:form>
+                                </div>
+                            </li>    
+                        </c:when>
+                        <c:otherwise>
+                            <li class="nav-item" id="in-lnk">
+                                <h:link role="menuitem" tabindex="-1" 
+                                        outcome="index.xhtml" class="nav-link">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    Login
+                                </h:link>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
 
-                                </li>    
-                            </c:when>
-                            <c:otherwise>
-                                <li class="nav-item" id="in-lnk">
-                                    <h:link role="menuitem" tabindex="-1" 
-                                            outcome="index.xhtml" class="nav-link">
-                                        <span class="glyphicon glyphicon-log-out"></span>
-                                        Login
-                                    </h:link>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </h:form>
                 </ul>
 
             </div>
 
 
         </nav>
-
-        <ui:insert name="content">Content</ui:insert>
-
+        <div class="container">
+            <div class="main">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
     </h:body>
 
 </html>

@@ -5,22 +5,25 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:define name="title">Login</ui:define>
     <ui:define name="content">
-        <div class="container">
+
+        <div class="row">
+        <h1>Login</h1>
+        </div>
         <c:choose>
             <c:when test="#{empty controlAutorizacion.usuario}">
 
                 <h:form id="login">
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label for="usuario">Usuario:</label>
                         <h:inputText id="usuario" class="form-control" value="#{login.usuario}" required="true"/>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label for="pass">Contraseña:</label>
                         <h:inputText id="pass" class="form-control" value="#{login.contrasenia}" required="true"/>
                     </div>
 
-                    <h:commandButton type="submit" class="btn btn-default" value="Autenticar" action="#{login.autenticar()}"/>
+                    <h:commandButton type="submit" class="btn btn-dark" value="Autenticar" action="#{login.autenticar()}"/>
 
                 </h:form>
 
@@ -41,14 +44,14 @@
             </c:otherwise>
         </c:choose>
 
-        
-            <h:messages class="alert alert-danger"/>
-    
-            
-        </div>
+
+        <h:messages class="alert alert-danger"/>
+
+
+
 
         <script>
-            $("#in-lnk").attr("class", "active");
+            $("#in-lnk").attr("class", "nav-item active");
         </script>
     </ui:define>
 </ui:composition>

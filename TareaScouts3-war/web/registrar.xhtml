@@ -10,9 +10,7 @@
     <ui:define name="title">Registrate</ui:define>
     <ui:define name="content">
 
-        <div class="container">
-
-            <h:form id="sign_in" class="form-horizontal">
+            <h:form id="sign_in">
                 <div class="form-group row">
                     <label class="control-label col-sm-2" for="usuario">Alias:</label>
                     <div class="col-sm-4">
@@ -161,10 +159,10 @@
                 </div>
 
                 <div class="col-sm-offset-2 col-sm-4">
-                    <h:commandButton class="btn btn-default" value="Sign in" action="#{signIn.autenticar()}"/>
+                    <h:commandButton class="btn btn-dark" value="Sign in" action="#{signIn.autenticar()}"/>
                 </div>
 
             </h:form>
-        </div>
+
     </ui:define>
 </ui:composition>

@@ -8,8 +8,10 @@ and open the template in the editor.
     Author     : sam
 */
 
-nav {
-  
-    
+.main > form{
+    margin: 10px 0 25px 0;
 }
 
+.main{
+    margin: 20px 0 25px 0;
+}
