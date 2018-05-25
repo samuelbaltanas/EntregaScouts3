@@ -24,15 +24,21 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> 
 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"/>
+
 
     </h:head>
 
     <h:body>
 
-        <nav  class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav id="menu" class="navbar navbar-expand-sm sticky-top bg-main navbar-dark">
 
 
-            <a class="navbar-brand mr-0 mr-md-2" href="index.xhtml">Scouts</a>
+            <a class="navbar-brand mr-0 mr-md-2" href="index.xhtml">
+                <!--    Scouts-->
+                <img src="../../resources/img/icon.jpg" width="150px" height="40px" alt="icon"/>
+
+            </a>
 
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +53,7 @@
 
                             <h:commandLink rendered="#{!empty controlAutorizacion.usuario}"
                                            action="listaEventos.xhtml" class="nav-link">
-                                <span class="glyphicon glyphicon-calendar"></span>
+                                <i class="fas fa-calendar"></i>
                                 Eventos
                             </h:commandLink>
 
@@ -59,7 +65,7 @@
                             <h:commandLink  rendered="#{!empty controlAutorizacion.usuario}" 
                                             role="menuitem" tabindex="-1" 
                                             action="#{accionDocumentos.documentos()}" class="nav-link">
-
+                                <i class="fas fa-file-alt"></i>
                                 Documentacion
                             </h:commandLink>
 
@@ -69,7 +75,7 @@
                         <h:link  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" 
                                  role="menuitem" tabindex="-1" 
                                  outcome="listaUsuarios.xhtml" class="nav-link">
-                            <span class="glyphicon glyphicon-list"></span>
+                            <i class="fas fa-list-alt"></i>
                             Lista Educandos
                         </h:link>
                     </li>
@@ -82,10 +88,10 @@
 
                             <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <span class="glyphicon glyphicon-user"></span>
+                                <a class="nav-link " data-toggle="dropdown" href="#">
+                                    <i class="fas fa-user"></i>
                                     <h:outputText value="#{controlAutorizacion.usuario.alias}" />
-                                    <span class="caret"></span>
+                                    <i class="fas fa-caret-down"></i>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -94,7 +100,7 @@
 
                                         <h:commandLink action="#{edicionUsuario.edit(controlAutorizacion.usuario.alias)}" 
                                                        class="dropdown-item" id="usr-lnk">
-                                            <span class="glyphicon glyphicon-user"></span>
+                                            <i class="fas fa-user"></i>
                                             Datos personales
                                         </h:commandLink>
 
@@ -103,7 +109,7 @@
                                     <h:form class="form-inline">
                                         <h:commandLink role="menuitem" tabindex="-1" action="#{controlAutorizacion.logout()}"
                                                        class="dropdown-item" id="out-lnk">
-                                            <span class="glyphicon glyphicon-log-out"></span>
+                                            <i class="fas fa-sign-out-alt"></i>
                                             Salir
                                         </h:commandLink>
                                     </h:form>
@@ -114,7 +120,7 @@
                             <li class="nav-item" id="in-lnk">
                                 <h:link role="menuitem" tabindex="-1" 
                                         outcome="index.xhtml" class="nav-link">
-                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    <i class="fas fa-sign-in-alt"></i>
                                     Login
                                 </h:link>
                             </li>
@@ -132,6 +138,20 @@
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
+
+        <script>
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function () {
+                var currentScrollPos = window.pageYOffset;
+                if (prevScrollpos > currentScrollPos) {
+                    document.getElementById("menu").style.top = "0";
+                } else {
+                    document.getElementById("menu").style.top = "-80px";
+                }
+                prevScrollpos = currentScrollPos;
+            };
+        </script>
+
     </h:body>
 
 </html>

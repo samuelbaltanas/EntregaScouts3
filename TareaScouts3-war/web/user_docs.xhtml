@@ -6,26 +6,43 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">Documentación</ui:define>
     <ui:define name="content">
-        <p><b>Información acerca de tu documentación.</b></p>
-        <c:forEach items="#{pruebaDocumentos.usrDocumentos()}" var="doc" >
-                        <b>Documento:</b> #{doc.nombre}<br/>
-                        <b>Estado:</b> #{doc.estado_documento}<br/>
-                        <b>Fecha de vencimiento de la entrega:</b> #{doc.fecha_limite}<br/>
-                        <c:if test="#{!empty doc.fecha_subida}">
-                            <b>Fecha de entrega:</b> #{doc.fecha_subida}<br/>
-                        </c:if> 
-                       
-                        <h:form enctype="multipart/form-data" rendered="#{doc.estado_documento=='PENDIENTE_ENTREGA'}">
-                            <b>Subir archivo:</b>
-                            <br/>
-                            <h:inputFile required="true" value="#{accionDocumentos.file}"/>
-                            
-                            <h:commandButton value="Subir" class="btn btn-dark" action="#{accionDocumentos.save(doc.id)}"/>                            
-                        </h:form>
-                        <br/>
-        </c:forEach>
+        <h1>Información acerca de tu documentación.</h1>
+        
+            <c:forEach items="#{pruebaDocumentos.usrDocumentos()}" var="doc" >
+                <div class="card">
+
+                    <div class="card-body">
+                        <h4 class="card-title">#{doc.nombre}</h4>
+
+                        <div class="card-text">
+                            <label>Estado:</label>
+                            <p>#{doc.estado_documento}</p>
+
+                            <label>Fecha límite:</label>
+                            <p>#{doc.fecha_limite}</p>
+
+                            <c:if test="#{!empty doc.fecha_subida}">
+                                <label>Fecha de entrega:</label> 
+                                <p>#{doc.fecha_subida}</p>
+                            </c:if> 
+
+                            <h:form enctype="multipart/form-data" rendered="#{doc.estado_documento=='PENDIENTE_ENTREGA'}">
+                                <div class="form-group">
+                                    <label for="upload">Subir archivo:</label>
+                                    <div class="upload">
+                                        <h:inputFile class="form-control-file" required="true" value="#{accionDocumentos.file}"/>
+                                         <h:commandButton value="Subir" action="#{accionDocumentos.save(doc.id)}"/>
+                                    </div>
+                                   
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+       
         <script>
-            $("#doc-lnk").attr("class","nav-item active");
+            $("#doc-lnk").attr("class", "nav-item active");
         </script>
-      </ui:define>
+    </ui:define>
 </ui:composition>

@@ -8,10 +8,24 @@ and open the template in the editor.
     Author     : sam
 */
 
+.bg-main {
+    background-color: #622599;
+}
+
 .main > form{
     margin: 10px 0 25px 0;
 }
 
 .main{
     margin: 20px 0 25px 0;
+}
+
+
+.upload input{
+    width: 100px;
+    margin: 0 0 10px 0;
+}
+
+#menu {
+     transition: top 0.3s;
 }

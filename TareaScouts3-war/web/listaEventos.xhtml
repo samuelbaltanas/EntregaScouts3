@@ -38,9 +38,9 @@
                 </h:column>
                 <h:column>
 
-                    <h:commandButton value="Apuntarse" class="btn btn-dark" rendered="#{!controlAutorizacion.esScouter() and !accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.apuntarse(evento.id)}"/>
+                    <h:commandButton value="Apuntarse" class="btn btn-success" rendered="#{!controlAutorizacion.esScouter() and !accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.apuntarse(evento.id)}"/>
 
-                    <h:commandButton value="Quitarse" class="btn btn-dark" rendered="#{!controlAutorizacion.esScouter() and accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.quitarse(evento.id)}"/>
+                    <h:commandButton value="Quitarse" class="btn btn-danger" rendered="#{!controlAutorizacion.esScouter() and accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.quitarse(evento.id)}"/>
 
                 </h:column>                         
             </h:dataTable>
