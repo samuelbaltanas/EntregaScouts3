@@ -19,6 +19,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface Negocio {
+    
+        public void compruebaLogin(Usuario user) throws NegocioException;;
+        
         //Eventos
         public void addEvento(Evento e);
         public void setEvento(Evento e);
@@ -29,8 +32,8 @@ public interface Negocio {
         
         //Usuarios
         public List<Usuario> listaUsuarios();
-        public Usuario refrescarUsuario(Usuario user);
-        public void nuevoUsuario(Usuario user);
+        public Usuario refrescarUsuario(Usuario user) throws NegocioException;
+        public void nuevoUsuario(Usuario user) throws NegocioException;
         public void modificarUsuario(Usuario user);
         
         //Documentos

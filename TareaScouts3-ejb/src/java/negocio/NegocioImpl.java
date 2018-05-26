@@ -21,6 +21,39 @@ public class NegocioImpl implements Negocio{
     
     @PersistenceContext(unitName = "TareaScouts3-PU")
     private EntityManager em;
+    
+      @Override
+    public void compruebaLogin(Usuario user) throws NegocioException{
+        Usuario u=em.find(Usuario.class,user.getNombre());
+        if(user==null){
+           throw new NombreInvalidoException();
+        }
+       if(u.getContraseña().equals(user.getContraseña())){
+          throw new ContrasenyaInvalidaException();
+    }
+  }
+    @Override
+    public Usuario refrescarUsuario(Usuario user) throws NegocioException{
+        compruebaLogin(user);
+        Usuario u=em.find(Usuario.class, user.getNombre());
+        em.refresh(u);
+        return u;
+    }
+
+    @Override
+    public void nuevoUsuario(Usuario user) throws NegocioException {
+        Usuario u=em.find(Usuario.class, user.getNombre());
+        if(u!=null){
+            throw new UsuarioInexistenteException();
+        }
+        em.persist(user);
+    }
+
+    @Override
+    public void modificarUsuario(Usuario user) {
+        em.merge(user);
+        
+    }
 
     @Override
     public void addEvento(Evento e) {
@@ -62,21 +95,7 @@ public class NegocioImpl implements Negocio{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Usuario refrescarUsuario(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void nuevoUsuario(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void modificarUsuario(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public List<Documento> listaDocumentos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -97,6 +116,11 @@ public class NegocioImpl implements Negocio{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
+    private void ContrasenyaInvalidaException() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
