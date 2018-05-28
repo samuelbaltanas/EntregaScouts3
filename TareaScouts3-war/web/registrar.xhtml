@@ -150,7 +150,7 @@
                     <label class="control-label col-sm-2" for="grupo">Agrupación:</label>
                     <div class="col-sm-4">
                         <h:selectOneMenu id="grupo" value="#{signIn.gr}">                    
-                            <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
+                            <f:selectItems value="#{signIn.groupList()}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
                         </h:selectOneMenu>
                     </div>
                     <span class="col-sm-6">

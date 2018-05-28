@@ -22,6 +22,10 @@ public interface Negocio {
     
         public void compruebaLogin(Usuario user) throws NegocioException;
         
+        //Grupo
+        public List<Grupo> listaGrupos();
+        public Grupo getGrupo(int id);
+        
         //Eventos
         public void addEvento(Evento e);
         public void setEvento(Evento e);

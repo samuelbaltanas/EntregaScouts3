@@ -52,7 +52,7 @@ public class NegocioImpl implements Negocio {
     public void nuevoUsuario(Usuario user) throws NegocioException {
         Usuario u = em.find(Usuario.class, user.getNombre());
         if (u != null) {
-            throw new UsuarioInexistenteException();
+            throw new UsuarioExistenteException();
         }
         em.persist(user);
     }
@@ -84,7 +84,6 @@ public class NegocioImpl implements Negocio {
         res = q1.getResultList();
 
         return res;
-        //return g.getLista_eventos();
     }
 
     @Override
@@ -124,5 +123,22 @@ public class NegocioImpl implements Negocio {
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
+    @Override
+    public List<Grupo> listaGrupos() {
+        
+        Query q = em.createQuery("select g from Grupo g");
+        List<Grupo> res = q.getResultList();
+        
+        return res;
+    }
+
+    @Override
+    public Grupo getGrupo(int id) {
+        
+         Grupo gr = em.find(Grupo.class, id);
+         
+        return gr;
+    }
    
 }
