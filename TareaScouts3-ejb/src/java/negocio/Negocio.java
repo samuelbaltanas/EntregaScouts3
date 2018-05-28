@@ -20,7 +20,7 @@ import javax.ejb.Local;
 @Local
 public interface Negocio {
     
-        public void compruebaLogin(Usuario user) throws NegocioException;;
+        public void compruebaLogin(Usuario user) throws NegocioException;
         
         //Eventos
         public void addEvento(Evento e);
@@ -38,7 +38,7 @@ public interface Negocio {
         
         //Documentos
         public List<Documento> listaDocumentos();
-        public List<Documento> documentosUser(Usuario usr);
+        public List<Documento> documentosUser(Usuario usr) throws NegocioException;
         public void modificarDocumento(Documento doc);
         public void crearDocumento(Documento doc);
         
