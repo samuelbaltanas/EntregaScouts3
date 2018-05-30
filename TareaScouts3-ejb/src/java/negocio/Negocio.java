@@ -31,8 +31,8 @@ public interface Negocio {
         public void setEvento(Evento e);
         public List<Evento> getEventos(Grupo g);
         
-        public void apuntarse(Usuario user, Evento e);
-        public void quitarse(Usuario user, Evento e);
+        public void apuntarse(Usuario user, Evento e) throws NegocioException;
+        public void quitarse(Usuario user, Evento e) throws NegocioException;
         
         //Usuarios
         public List<Usuario> listaUsuarios();
@@ -43,7 +43,7 @@ public interface Negocio {
         //Documentos
         public List<Documento> listaDocumentos();
         public List<Documento> documentosUser(Usuario usr) throws NegocioException;
-        public void modificarDocumento(Documento doc);
+        public void modificarDocumento(Documento doc) throws NegocioException;
         public void crearDocumento(Documento doc);
         
         

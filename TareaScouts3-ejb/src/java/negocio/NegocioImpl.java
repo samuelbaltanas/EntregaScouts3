@@ -23,13 +23,6 @@ public class NegocioImpl implements Negocio {
     private EntityManager em;
 
     @Override
-    public List<Documento> listaDocumentos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
-
-    @Override
     public void compruebaLogin(Usuario user) throws NegocioException {
         Usuario u = em.find(Usuario.class, user.getNombre());
         if (user == null) {
@@ -86,21 +79,6 @@ public class NegocioImpl implements Negocio {
         return res;
     }
 
-    @Override
-    public void apuntarse(Usuario user, Evento e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void quitarse(Usuario user, Evento e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Usuario> listaUsuarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
      @Override
     public List<Documento> documentosUser(Usuario usr) throws NegocioException {
 
@@ -109,12 +87,7 @@ public class NegocioImpl implements Negocio {
 
         return listDomUser;
     }
-    
-    @Override
-    public void modificarDocumento(Documento doc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+ 
      @Override
     public void crearDocumento(Documento doc) {
         
@@ -136,9 +109,70 @@ public class NegocioImpl implements Negocio {
     @Override
     public Grupo getGrupo(int id) {
         
-         Grupo gr = em.find(Grupo.class, id);
-         
+        Grupo gr = em.find(Grupo.class, id);
+        
         return gr;
     }
+    
+    @Override
+    public void apuntarse(Usuario user, Evento e) throws NegocioException {
+     
+        Usuario u= refrescarUsuario(user);
+        List<Evento> res= u.getParticipa_eventos();
+        
+        if (res.contains(e)){
+            throw new UsuarioApuntadoException("Usuario apuntado");
+        }else{
+            em.persist(e);
+        }
+        
+    }
    
+
+    @Override
+    public void quitarse(Usuario user, Evento e) throws NegocioException {
+        Usuario u= refrescarUsuario(user);
+        
+        List<Evento> res= u.getParticipa_eventos();
+        
+        if (res.contains(e)){
+            em.remove(e);
+            
+        }else{
+            throw new UsuarioApuntadoException("Usuario apuntado");
+           
+        }
+    }
+
+
+    @Override
+    public List<Usuario> listaUsuarios() {
+       
+        List<Usuario> res;
+        Query u1 = em.createQuery("SELECT c FROM Evento c ORDER BY C.fecha ASC");
+        
+        res = u1.getResultList();
+        
+        return res;
+    }
+ 
+    @Override
+    public List<Documento> listaDocumentos() {
+        List <Documento> res;
+        Query q1 = em.createQuery("SELECT I FROM Documento I");
+        res=q1.getResultList();
+        return res;
+    }
+    
+    @Override
+    public void modificarDocumento(Documento doc) throws NegocioException{
+        Query q = em.createQuery("selcect d from Documento d");
+        List<Documento> docs = q.getResultList();
+        
+        if (docs.contains(doc)) {
+            throw new InexistentDocException();
+        }
+        
+        em.merge(doc);
+    }
 }

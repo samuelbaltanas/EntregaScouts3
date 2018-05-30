@@ -9,12 +9,12 @@ package negocio;
  *
  * @author sam
  */
-public class NegocioException extends Exception{
+public class UsuarioApuntadoException extends NegocioException {
 
-    public NegocioException() {
+    public UsuarioApuntadoException() {
     }
     
-    public NegocioException(String s) {
+    public UsuarioApuntadoException(String s) {
         super(s);
     }
     

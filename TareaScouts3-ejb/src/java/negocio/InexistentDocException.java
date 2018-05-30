@@ -9,13 +9,9 @@ package negocio;
  *
  * @author sam
  */
-public class NegocioException extends Exception{
+public class InexistentDocException extends NegocioException {
 
-    public NegocioException() {
-    }
-    
-    public NegocioException(String s) {
-        super(s);
+    public InexistentDocException() {
     }
     
 }
