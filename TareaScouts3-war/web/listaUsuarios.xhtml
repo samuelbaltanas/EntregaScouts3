@@ -22,7 +22,7 @@
             <h1>Listado de usuarios</h1>
         </div>
 
-        <h:dataTable value="#{listaUsuarios.usuarios}" var="usuario" class="table">
+        <h:dataTable value="#{listaUsuarios.getUsuarios()}" var="usuario" class="table">
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Nombre"></h:outputText>

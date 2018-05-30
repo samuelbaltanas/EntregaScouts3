@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="grupo">Grupo</label>
                 <h:selectOneMenu class="form-control" id="grupo" value="#{edicionUsuario.gr}">                    
-                    <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
+                    <f:selectItems value="#{edicionUsuario.listaGrup()}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>
                 </h:selectOneMenu>
             </div>
 

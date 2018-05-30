@@ -8,7 +8,7 @@
     <ui:define name="content">
         <h1>Información acerca de tu documentación.</h1>
         
-            <c:forEach items="#{pruebaDocumentos.usrDocumentos()}" var="doc" >
+        <c:forEach items="#{accionDocumentos.docsUsuario}" var="doc" >
                 <div class="card">
 
                     <div class="card-body">
@@ -31,7 +31,7 @@
                                     <label for="upload">Subir archivo:</label>
                                     <div class="upload">
                                         <h:inputFile class="form-control-file" required="true" value="#{accionDocumentos.file}"/>
-                                         <h:commandButton value="Subir" action="#{accionDocumentos.save(doc.id)}"/>
+                                        <h:commandButton value="Subir" action="#{accionDocumentos.save(doc.id)}"/>
                                     </div>
                                    
                                 </div>

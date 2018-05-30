@@ -175,4 +175,15 @@ public class NegocioImpl implements Negocio {
         
         em.merge(doc);
     }
+
+    @Override
+    public Evento getEvento(Long id) {
+      return em.find(Evento.class,id);
+    }
+    
+    @Override
+    public Documento getDocumento(Long id){
+        
+        return em.find(Documento.class, id);
+    }
 }

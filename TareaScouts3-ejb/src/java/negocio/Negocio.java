@@ -29,6 +29,7 @@ public interface Negocio {
         //Eventos
         public void addEvento(Evento e);
         public void setEvento(Evento e);
+        public Evento getEvento(Long id);
         public List<Evento> getEventos(Grupo g);
         
         public void apuntarse(Usuario user, Evento e) throws NegocioException;
@@ -45,6 +46,9 @@ public interface Negocio {
         public List<Documento> documentosUser(Usuario usr) throws NegocioException;
         public void modificarDocumento(Documento doc) throws NegocioException;
         public void crearDocumento(Documento doc);
+        public Documento getDocumento(Long id);
+
+    
         
         
 }

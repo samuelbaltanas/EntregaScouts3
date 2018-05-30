@@ -13,7 +13,7 @@
         </div>
         
         <h:dataTable class="table" 
-                     value="#{pruebaDocumentos.documentos}"
+                     value="#{accionDocumentos.documentos}"
                      var="docs"
                      >
 
@@ -65,7 +65,7 @@
             <h:column>
                 <h:form>
                     <h:commandButton rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" 
-                                     action="#{docs.setEstado_documento('CORRECTO')}" 
+                                     action="#{accionDocumentos.verificar(docs.id)}" 
                                      value=" Validar"
                                      class="btn btn-success"/>
                 </h:form>

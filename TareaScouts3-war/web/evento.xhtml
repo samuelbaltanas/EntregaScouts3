@@ -47,7 +47,7 @@
                 <div>
                     <h:selectManyCheckbox id="grp" value="#{creacionEdicionEvento.evento.pertenece_a}">
 
-                        <f:selectItems value="#{listaGrupos.grupos}" var="g" itemValue="#{g}" itemLabel="#{g.nombre}" />
+                        <f:selectItems value="#{creacionEdicionEventos.listaEventos()}" var="g" itemValue="#{g}" itemLabel="#{g.nombre}" />
 
                     </h:selectManyCheckbox>
                 </div>

@@ -13,7 +13,7 @@
             <h1>Lista de eventos</h1>
         </div>
         <h:form id="evt">
-            <h:dataTable class="table" value="#{listaEventos.eventos}" var="evento">
+            <h:dataTable class="table" value="#{accionEvento.getEventos()}" var="evento">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Nombre"></h:outputText>

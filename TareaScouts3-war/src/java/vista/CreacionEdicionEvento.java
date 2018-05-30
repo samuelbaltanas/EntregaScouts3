@@ -7,11 +7,14 @@ package vista;
 
 import entidades.Evento;
 import java.io.Serializable;
-
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-
+import entidades.Grupo;
+import java.util.List;
 import javax.inject.Inject;
+import negocio.Negocio;
 
 /**
  *
@@ -20,11 +23,14 @@ import javax.inject.Inject;
 @Named(value = "creacionEdicionEvento")
 @RequestScoped
 public class CreacionEdicionEvento implements Serializable{
-    
+    @EJB
+    private Grupo g;
+    private Negocio negocio;
     private Evento evento;
-    
-    @Inject 
-    listaEventos lista;
+    private String nombre;
+    private String descripcion;
+    private Date fecha;
+   
     
     boolean creacion;
 
@@ -37,27 +43,62 @@ public class CreacionEdicionEvento implements Serializable{
     }
 
     public String editar(Long id){
-    
-        Evento tmp = new Evento(id);
-        int idx = this.lista.getEventos().indexOf(tmp);
-        this.evento = this.lista.getEventos().get(idx);
+        List <Evento> res;
+        Evento event= negocio.getEvento(id);
+        this.evento=event;
         creacion = false;
-        
         return "evento.xhtml";
+    }
+
+    public Negocio getNegocio() {
+        return negocio;
+    }
+
+    public void setNegocio(Negocio negocio) {
+        this.negocio = negocio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
     public String crear(){
-        creacion = true;
-        this.evento = new Evento(new Long(this.lista.getEventos().size()));
-        return "evento.xhtml";
+      
+        Evento event =new Evento();
+        event.setNombre(nombre);
+        event.setFecha(fecha);
+        event.setDescripcion(descripcion);
+        negocio.addEvento(event);
+        
+         return "evento.xhtml";
     }
 
     public String commit(Evento ev){
         if(creacion){
-            lista.getEventos().add(ev);
+            negocio.addEvento(ev);
+           
         }else{
-            int pos = this.lista.getEventos().indexOf(ev);
-            lista.getEventos().set(pos, ev);
+          negocio.setEvento(ev);
         }
         
         return "listaEventos.xhtml";

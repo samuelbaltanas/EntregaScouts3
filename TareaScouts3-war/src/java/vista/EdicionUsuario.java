@@ -7,9 +7,17 @@ package vista;
 
 import entidades.Grupo;
 import entidades.Usuario;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import negocio.Negocio;
+
+ import javax.inject.Inject;
+import negocio.NegocioException;
 
 /**
  *
@@ -19,44 +27,37 @@ import javax.inject.Inject;
 @RequestScoped
 public class EdicionUsuario {
 
-    
+    @EJB
+    Negocio neg; 
     @Inject
-    ListaUsuarios lst;
-    
-    @Inject
-    listaGrupos lgr;
-    
+    ControlAutorizacion ctr;
     Usuario usuario;
     Grupo gr;
     
     //METHODS
     
-    public String edit(String alias){
-        
-        int idx = lst.getUsuarios().indexOf(new Usuario(alias));
-    
-        this.usuario = lst.getUsuarios().get(idx);
+    public String edit(){
+         try {
+
+            this.usuario=neg.refrescarUsuario(ctr.getUsuario());
+
+         } catch (NegocioException ex) {
+            Logger.getLogger(EdicionUsuario.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
         return "datosUsuario.xhtml";
     }
         
     
     public String commit(){
         
-        int idx = lst.getUsuarios().indexOf(usuario);
-        Usuario u2 = lst.getUsuarios().get(idx);
-        u2.setNombre(this.usuario.getNombre());
-        u2.setApellidos(this.usuario.getApellidos());
-        u2.setDni(this.usuario.getDni());
-        u2.setFecha_nacimiento(this.usuario.getFecha_nacimiento());
-        u2.setEmail(this.usuario.getEmail());
-        u2.setDireccion(this.usuario.getDireccion());
-        u2.setGrupo(this.usuario.getGrupo());
-        u2.setTelefono(this.usuario.getTelefono());
-        lst.getUsuarios().set(idx, u2);
+        neg.modificarUsuario(usuario);
         return null;
     }
 
-    
+    public List<Grupo> listaGrup(){
+        return neg.listaGrupos();
+    }
     
     //GETTERS & SETTERS
     public Usuario getUsuario() {
@@ -70,8 +71,8 @@ public class EdicionUsuario {
         return Integer.toString(gr.getId()) ;
     }
 
-    public void setGr(String gr) {
-        this.gr = lgr.getGrupos().get(new Integer(gr));
+    public void setGr(int gr) {
+        this.gr = neg.getGrupo(gr);
     }
     
     
