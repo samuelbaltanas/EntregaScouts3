@@ -7,6 +7,8 @@ package vista;
 
 import entidades.Documento;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,7 +21,6 @@ import javax.servlet.http.Part;
 import negocio.Negocio;
 import negocio.NegocioException;
 
-
 /**
  *
  * @author sam
@@ -27,90 +28,89 @@ import negocio.NegocioException;
 @Named(value = "accionDocumentos")
 @RequestScoped
 public class accionDocumentos implements Serializable {
-    
+
     @EJB
     private Negocio negocio;
-    
+
     @Inject
     ControlAutorizacion ctr;
 
     private Part file;
-   
-    
-    public accionDocumentos(){}
-    
-    
-    
+
+    public accionDocumentos() {
+    }
+
     public List<Documento> getDocumentos() {
         return negocio.listaDocumentos();
     }
-    
 
     public List<Documento> getDocsUsuario() {
         List<Documento> lst = null;
         try {
-           lst =  negocio.documentosUser(ctr.getUsuario());
+            lst = negocio.documentosUser(ctr.getUsuario());
         } catch (NegocioException ex) {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lst;
     }
-    
-    
+
     public Part getFile() {
         return file;
     }
 
     public void setFile(Part file) {
-        
+
         this.file = file;
     }
-    
-    public String verificar(Long id){
-        
-        Documento d= negocio.getDocumento(id);
-        
+
+    public String verificar(Long id) {
+
+        Documento d = negocio.getDocumento(id);
+
         d.setEstado_documento(Documento.Estado.CORRECTO);
         try {
             negocio.modificarDocumento(d);
         } catch (NegocioException ex) {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
-    
-    
-    public String commit(Long id){
+
+    public String commit(Long id) {
+
+        InputStream str = null;
+        Documento doc = null;
+
+        try {
+            str = file.getInputStream();
+            doc = negocio.getDocumento(id);
         
-        Documento d= negocio.getDocumento(id);
+            str.read(doc.getFile());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        doc.setEstado_documento(Documento.Estado.CORRECTO);
         
         try {
-            negocio.modificarDocumento(d);
+            negocio.modificarDocumento(doc);
         } catch (NegocioException ex) {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
+        
         return null;
     }
-    
-    
-    
-    
-    public String save(Long id){
-        
-        //TODO
-        throw new UnsupportedOperationException();
-    }
-    
 
-    public String documentos(){
+    public String documentos() {
         if (!ctr.esEducando()) {
             return "documentacion.xhtml";
         } else {
             return "user_docs.xhtml";
         }
     }
-    
+
 }
