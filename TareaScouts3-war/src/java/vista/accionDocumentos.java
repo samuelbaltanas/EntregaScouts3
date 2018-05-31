@@ -80,14 +80,15 @@ public class accionDocumentos implements Serializable {
     public String commit(Long id) {
 
         InputStream str = null;
-        Documento doc = null;
+        Documento doc = negocio.getDocumento(id);
 
         try {
             str = file.getInputStream();
-            doc = negocio.getDocumento(id);
+            
         
             str.read(doc.getFile());
             
+            str.close();
         } catch (IOException ex) {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
