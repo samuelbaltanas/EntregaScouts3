@@ -64,6 +64,7 @@ public class Login {
         
         Usuario user = new Usuario();
         user.setAlias(usuario);
+        user.setContraseña(contrasenia);
 
         try {
             user = neg.refrescarUsuario(user);

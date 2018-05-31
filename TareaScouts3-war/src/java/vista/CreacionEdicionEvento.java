@@ -23,9 +23,10 @@ import negocio.Negocio;
 @Named(value = "creacionEdicionEvento")
 @RequestScoped
 public class CreacionEdicionEvento implements Serializable{
-    @EJB
-    private Grupo g;
+    @EJB 
     private Negocio negocio;
+    
+    private Grupo g;
     private Evento evento;
     private String nombre;
     private String descripcion;

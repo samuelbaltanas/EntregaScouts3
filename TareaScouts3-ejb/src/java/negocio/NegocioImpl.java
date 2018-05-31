@@ -24,9 +24,9 @@ public class NegocioImpl implements Negocio {
 
     @Override
     public void compruebaLogin(Usuario user) throws NegocioException {
-        Usuario u = em.find(Usuario.class, user.getNombre());
-        if (user == null) {
-            throw new NombreInvalidoException();
+        Usuario u = em.find(Usuario.class, user.getAlias());
+        if (u == null) {
+            throw new UsuarioInexistenteException();
         }
         if (u.getContraseña().equals(user.getContraseña())) {
             throw new ContrasenyaInvalidaException();
