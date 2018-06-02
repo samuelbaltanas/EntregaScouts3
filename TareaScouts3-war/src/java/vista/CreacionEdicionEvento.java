@@ -67,7 +67,11 @@ public class CreacionEdicionEvento implements Serializable {
     public String commit() {
 
         if (creacion) {
-            List<Grupo> lst = new ArrayList<Grupo>();
+            List<Grupo> lst = evento.getPertenece_a();
+            
+            for (Integer i : list) {
+                lst.add(negocio.getGrupo(i));
+            }
             
             negocio.addEvento(evento);
         } else {

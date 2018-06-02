@@ -71,8 +71,6 @@ public class NegocioImpl implements Negocio {
     public List<Evento> getEventos(Grupo g) {
 
         List<Evento> res;
-        
-        em.refresh(g);
 
         res = g.getLista_eventos();
 
