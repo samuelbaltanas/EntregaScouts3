@@ -66,7 +66,7 @@ public class CreacionEdicionEvento implements Serializable {
         if (creacion) {
             List<Grupo> lst = new ArrayList<>();
             
-            for (Integer i : list) {
+            for(Integer i : list) {
                 lst.add(negocio.getGrupo(i));
             }
             
@@ -92,7 +92,7 @@ public class CreacionEdicionEvento implements Serializable {
      * Creates a new instance of CreacionEdicionEvento
      */
     public CreacionEdicionEvento() {
-
+        
         this.evento = new Evento();
     }
 

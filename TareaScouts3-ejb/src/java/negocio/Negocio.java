@@ -34,6 +34,7 @@ public interface Negocio {
         public boolean estaApuntado(Usuario usr, Long e)  throws NegocioException;
         public List<Evento> getEventos(Usuario u) throws NegocioException;
         public List<Evento> allEventos();
+        public void borrarEvento(Long e);
         
         public void apuntarse(Usuario user, Evento e) throws NegocioException;
         public void quitarse(Usuario user, Evento e) throws NegocioException;

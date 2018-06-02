@@ -91,4 +91,8 @@ public class accionEvento implements Serializable {
         return list;
     }
 
+    public String borrarEvento(Long e){
+        neg.borrarEvento(e);
+        return "";
+    }
 }

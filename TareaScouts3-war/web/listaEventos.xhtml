@@ -42,6 +42,9 @@
 
                     <h:commandButton value="Quitarse" class="btn btn-danger" rendered="#{!controlAutorizacion.esScouter() and accionEvento.estaApuntado(evento.id)}" action="#{accionEvento.quitarse(evento.id)}"/>
 
+                        
+                    <h:commandButton value="Borrar" class="btn btn-danger" rendered="#{controlAutorizacion.esScouter()}" action="#{accionEvento.borrarEvento(evento.id)}"/>
+    
                 </h:column>                         
             </h:dataTable>
             <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
@@ -52,7 +55,7 @@
                              class="btn btn-dark" 
                              value="Crear Evento" 
                              action="#{creacionEdicionEvento.crear()}"/>
-        </h:form>
+            </h:form>
         <script>
             $("#evt-lnk").attr("class", "nav-item active");
         </script>

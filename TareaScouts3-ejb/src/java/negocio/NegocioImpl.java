@@ -152,7 +152,7 @@ public class NegocioImpl implements Negocio {
     public List<Usuario> listaUsuarios() {
        
         List<Usuario> res;
-        Query u1 = em.createQuery("SELECT c FROM Evento c ORDER BY C.fecha ASC");
+        Query u1 = em.createQuery("SELECT c FROM Usuario c ORDER BY C.nombre ASC");
         
         res = u1.getResultList();
         
@@ -206,6 +206,13 @@ public class NegocioImpl implements Negocio {
         
         return res;
         
+    }
+    
+    @Override
+    public void borrarEvento(Long e){
+          Evento ev = em.find(Evento.class, e);
+          em.remove(ev);
+           
     }
 
 }
