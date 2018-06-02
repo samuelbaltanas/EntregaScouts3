@@ -57,21 +57,20 @@ public class CreacionEdicionEvento implements Serializable {
 
     public String crear() {
 
-        Evento event = new Evento();
-        event.setPertenece_a(new ArrayList<>());
         this.creacion = true;
-        list = new ArrayList<>();
         return "evento.xhtml";
     }
 
     public String commit() {
 
         if (creacion) {
-            List<Grupo> lst = evento.getPertenece_a();
+            List<Grupo> lst = new ArrayList<>();
             
             for (Integer i : list) {
                 lst.add(negocio.getGrupo(i));
             }
+            
+            evento.setPertenece_a(lst);
             
             negocio.addEvento(evento);
         } else {

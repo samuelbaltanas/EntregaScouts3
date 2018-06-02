@@ -52,7 +52,7 @@ public class Grupo implements Serializable {
     private List<Usuario> lista_usuarios;
    
     @JoinTable(name = "jnd_evn_grp")
-    @ManyToMany(mappedBy = "pertenece_a", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "pertenece_a", cascade = CascadeType.MERGE)
     private List<Evento> lista_eventos;
 
     public String getNombre() {

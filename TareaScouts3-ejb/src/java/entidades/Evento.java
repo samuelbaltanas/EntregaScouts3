@@ -54,14 +54,14 @@ public class Evento implements Serializable {
 
   
   //Relaciones
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "jnd_evn_grp",
     joinColumns = @JoinColumn(name = "evento_fk"),
     inverseJoinColumns = @JoinColumn(name = "grupo_fk"))
     private List<Grupo> pertenece_a;
     
     @JoinTable(name = "jnd_usr_tut")
-    @ManyToMany(mappedBy = "participa_eventos", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "participa_eventos", cascade = CascadeType.MERGE)
     private List<Usuario> participantes;
 
     

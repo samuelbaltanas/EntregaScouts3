@@ -83,7 +83,7 @@ public class Usuario implements Serializable {
     @ManyToMany
     private List<Tutor_legal> es_tutelado;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "jnd_usr_evt",
     joinColumns = @JoinColumn(name = "usuario_fk"),
     inverseJoinColumns = @JoinColumn(name = "evento_fk"))
