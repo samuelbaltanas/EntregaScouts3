@@ -12,8 +12,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import entidades.Grupo;
+import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import negocio.Negocio;
 
 /**
@@ -22,18 +22,22 @@ import negocio.Negocio;
  */
 @Named(value = "creacionEdicionEvento")
 @RequestScoped
-public class CreacionEdicionEvento implements Serializable{
-    @EJB 
+public class CreacionEdicionEvento implements Serializable {
+
+    @EJB
     private Negocio negocio;
-    
-    private Grupo g;
     private Evento evento;
-    private String nombre;
-    private String descripcion;
-    private Date fecha;
-   
-    
     boolean creacion;
+
+    ArrayList<Integer> list;
+
+    public ArrayList<Integer> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Integer> list) {
+        this.list = list;
+    }
 
     public Evento getEvento() {
         return evento;
@@ -43,65 +47,33 @@ public class CreacionEdicionEvento implements Serializable{
         this.evento = evento;
     }
 
-    public String editar(Long id){
-        List <Evento> res;
-        Evento event= negocio.getEvento(id);
-        this.evento=event;
+    public String editar(Long id) {
+        Evento event = negocio.getEvento(id);
+        this.evento = event;
         creacion = false;
+       
         return "evento.xhtml";
     }
 
-    public Negocio getNegocio() {
-        return negocio;
+    public String crear() {
+
+        Evento event = new Evento();
+        event.setPertenece_a(new ArrayList<>());
+        this.creacion = true;
+        list = new ArrayList<>();
+        return "evento.xhtml";
     }
 
-    public void setNegocio(Negocio negocio) {
-        this.negocio = negocio;
-    }
+    public String commit() {
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    
-    public String crear(){
-      
-        Evento event =new Evento();
-        event.setNombre(nombre);
-        event.setFecha(fecha);
-        event.setDescripcion(descripcion);
-        negocio.addEvento(event);
-        
-         return "evento.xhtml";
-    }
-
-    public String commit(Evento ev){
-        if(creacion){
-            negocio.addEvento(ev);
-           
-        }else{
-          negocio.setEvento(ev);
+        if (creacion) {
+            List<Grupo> lst = new ArrayList<Grupo>();
+            
+            negocio.addEvento(evento);
+        } else {
+            negocio.setEvento(evento);
         }
-        
+
         return "listaEventos.xhtml";
     }
 
@@ -112,17 +84,18 @@ public class CreacionEdicionEvento implements Serializable{
     public void setCreacion(boolean creacion) {
         this.creacion = creacion;
     }
-   
-    
+
     /**
      * Creates a new instance of CreacionEdicionEvento
      */
     public CreacionEdicionEvento() {
-        
-        this.evento = new Evento();
-    }  
-    
-    
-     
-  }
 
+        this.evento = new Evento();
+    }
+
+    public List<Grupo> listaGrupos() {
+
+        return negocio.listaGrupos();
+    }
+
+}

@@ -10,8 +10,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -74,13 +76,14 @@ public class Usuario implements Serializable {
     @ManyToOne
     private Localidad reside_en;
     
-    @ManyToMany
+    
     @JoinTable(name = "jnd_usr_tut",
     joinColumns = @JoinColumn(name = "usuario_fk"),
     inverseJoinColumns = @JoinColumn(name = "tutor_legal_fk"))
+    @ManyToMany
     private List<Tutor_legal> es_tutelado;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "jnd_usr_evt",
     joinColumns = @JoinColumn(name = "usuario_fk"),
     inverseJoinColumns = @JoinColumn(name = "evento_fk"))

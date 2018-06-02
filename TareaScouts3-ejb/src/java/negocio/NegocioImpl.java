@@ -4,6 +4,7 @@ import entidades.Documento;
 import entidades.Evento;
 import entidades.Grupo;
 import entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -28,7 +29,7 @@ public class NegocioImpl implements Negocio {
         if (u == null) {
             throw new UsuarioInexistenteException();
         }
-        if (u.getContraseña().equals(user.getContraseña())) {
+        if (!u.getContraseña().equals(user.getContraseña())) {
             throw new ContrasenyaInvalidaException();
         }
     }
@@ -36,7 +37,7 @@ public class NegocioImpl implements Negocio {
     @Override
     public Usuario refrescarUsuario(Usuario user) throws NegocioException {
         compruebaLogin(user);
-        Usuario u = em.find(Usuario.class, user.getNombre());
+        Usuario u = em.find(Usuario.class, user.getAlias());
         em.refresh(u);
         return u;
     }
@@ -63,18 +64,17 @@ public class NegocioImpl implements Negocio {
 
     @Override
     public void setEvento(Evento e) {
-        em.persist(e);
+        em.merge(e);
     }
 
     @Override
     public List<Evento> getEventos(Grupo g) {
 
         List<Evento> res;
+        
+        em.refresh(g);
 
-        Query q1 = em.createQuery("SELECT c FROM Evento c WHERE c.pertenece_a = ?1 ORDER BY C.fecha ASC");
-        q1.setParameter(1, g.getId());
-
-        res = q1.getResultList();
+        res = g.getLista_eventos();
 
         return res;
     }
@@ -118,12 +118,14 @@ public class NegocioImpl implements Negocio {
     public void apuntarse(Usuario user, Evento e) throws NegocioException {
      
         Usuario u= refrescarUsuario(user);
+        
         List<Evento> res= u.getParticipa_eventos();
         
         if (res.contains(e)){
             throw new UsuarioApuntadoException("Usuario apuntado");
         }else{
-            em.persist(e);
+            res.add(e);
+            em.merge(u);
         }
         
     }
@@ -136,8 +138,8 @@ public class NegocioImpl implements Negocio {
         List<Evento> res= u.getParticipa_eventos();
         
         if (res.contains(e)){
-            em.remove(e);
-            
+            res.remove(e);
+            em.merge(u);
         }else{
             throw new UsuarioApuntadoException("Usuario apuntado");
            
@@ -186,4 +188,23 @@ public class NegocioImpl implements Negocio {
         
         return em.find(Documento.class, id);
     }
+
+    @Override
+    public boolean estaApuntado(Usuario usr, Long e) throws NegocioException{
+        
+            usr = refrescarUsuario(usr);
+               
+            return usr.getParticipa_eventos().contains(new Evento(e));
+      
+    }
+
+    @Override
+    public List<Evento> allEventos() {
+        Query q = em.createQuery("select g from Evento g ORDER BY G.fecha ASC");
+        List<Evento> res = q.getResultList();
+        
+        return res;
+        
+    }
+
 }

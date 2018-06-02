@@ -25,13 +25,13 @@
 
         <h:form>
             <div class="form-group">
-                <h:outputLabel for="nombre" value = "Nombre" />
-                <h:inputText id="nombre" class="form-control" value="#{creacionEdicionEvento.evento.nombre}" />
+                <h:outputLabel for="nombre"  value = "Nombre" />
+                <h:inputText id="nombre" class="form-control" required="true" value="#{creacionEdicionEvento.evento.nombre}" />
             </div>
 
             <div class="form-group">
                 <h:outputLabel for="fecha" value = "Fecha" />
-                <h:inputText id="fecha" class="form-control" value="#{creacionEdicionEvento.evento.fecha}">
+                <h:inputText id="fecha" required="true" class="form-control" value="#{creacionEdicionEvento.evento.fecha}">
                     <f:convertDateTime pattern="dd/MM/yy"/>
                 </h:inputText>
             </div>
@@ -45,9 +45,9 @@
                 <h:outputLabel for="grp" value = "Grupos que participaran" />
 
                 <div>
-                    <h:selectManyCheckbox id="grp" value="#{creacionEdicionEvento.evento.pertenece_a}">
+                    <h:selectManyCheckbox id="grp" value="#{creacionEdicionEvento.list}">
 
-                        <f:selectItems value="#{creacionEdicionEventos.listaEventos()}" var="g" itemValue="#{g}" itemLabel="#{g.nombre}" />
+                        <f:selectItems value="#{creacionEdicionEvento.listaGrupos()}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}" />
 
                     </h:selectManyCheckbox>
                 </div>
@@ -55,7 +55,7 @@
 
             <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
 
-            <h:commandButton class="btn btn-dark" type="submit" value ="Enviar" action="#{creacionEdicionEvento.commit(creacionEdicionEvento.evento)}"/>
+            <h:commandButton class="btn btn-dark" type="submit" value ="Enviar" action="#{creacionEdicionEvento.commit()}"/>
         </h:form>
 
     </ui:define>

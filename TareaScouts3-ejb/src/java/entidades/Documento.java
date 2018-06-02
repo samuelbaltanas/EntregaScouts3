@@ -5,7 +5,6 @@
  */
 package entidades;
 
-import java.io.File;
 import java.io.Serializable; 
 import java.util.Date;  
 import javax.persistence.Column;

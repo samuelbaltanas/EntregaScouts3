@@ -8,6 +8,7 @@ package entidades;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -49,11 +50,9 @@ public class Grupo implements Serializable {
          
    @OneToMany(mappedBy = "grupo")
     private List<Usuario> lista_usuarios;
-    
-    @ManyToMany
-    @JoinTable(name = "jnd_evn_grp",
-    joinColumns = @JoinColumn(name = "grupo_fk"),
-    inverseJoinColumns = @JoinColumn(name = "evento_fk"))
+   
+    @JoinTable(name = "jnd_evn_grp")
+    @ManyToMany(mappedBy = "pertenece_a", cascade = CascadeType.ALL)
     private List<Evento> lista_eventos;
 
     public String getNombre() {

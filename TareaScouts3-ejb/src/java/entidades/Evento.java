@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 /**
@@ -50,9 +54,14 @@ public class Evento implements Serializable {
 
   
   //Relaciones
-    @ManyToMany(mappedBy = "lista_eventos")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "jnd_evn_grp",
+    joinColumns = @JoinColumn(name = "evento_fk"),
+    inverseJoinColumns = @JoinColumn(name = "grupo_fk"))
     private List<Grupo> pertenece_a;
-    @ManyToMany(mappedBy = "participa_eventos")
+    
+    @JoinTable(name = "jnd_usr_tut")
+    @ManyToMany(mappedBy = "participa_eventos", cascade = CascadeType.ALL)
     private List<Usuario> participantes;
 
     
