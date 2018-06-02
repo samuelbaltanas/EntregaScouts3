@@ -41,20 +41,18 @@
                 <h:inputTextarea id="desc" class="form-control" value="#{creacionEdicionEvento.evento.descripcion}" />
             </div>
 
-            <c:if test="#{creacionEdicionEvento.creacion}">
+            
             <div class="form-group">
-                <h:outputLabel for="grp" value = "Grupos que participaran" />
+                <h:outputLabel  for="grp" value = "Grupos que participaran" />
 
                 <div>
-                    <h:selectManyCheckbox id="grp" value="#{creacionEdicionEvento.list}">
-
-                        <f:selectItems value="#{creacionEdicionEvento.listaGrupos()}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}" />
-
+                    <h:selectManyCheckbox id="grp" value="#{creacionEdicionEvento.lista}">
+                        <f:selectItems value="#{creacionEdicionEvento.listaGrupos()}" var="g" itemValue="#{g.id}" itemLabel="#{g.nombre}"/>   
                     </h:selectManyCheckbox>
                 </div>
             </div>
 
-            </c:if>
+           
             
             <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
             

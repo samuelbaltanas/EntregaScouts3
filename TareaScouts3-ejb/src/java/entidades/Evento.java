@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -42,13 +40,7 @@ public class Evento implements Serializable {
    @Column(name="descripcion" , nullable= false , length=500)
     private String descripcion;
 
-    public List<Grupo> getPertenece_a() {
-        return pertenece_a;
-    }
-
-    public void setPertenece_a(List<Grupo> pertenece_a) {
-        this.pertenece_a = pertenece_a;
-    }
+ 
 
   
 
@@ -146,8 +138,13 @@ public class Evento implements Serializable {
         this.participantes = participantes;
     }
 
-   
+   public List<Grupo> getPertenece_a() {
+        return pertenece_a;
+    }
 
+    public void setPertenece_a(List<Grupo> pertenece_a) {
+        this.pertenece_a = pertenece_a;
+    }
    
 }
     

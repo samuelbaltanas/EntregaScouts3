@@ -10,6 +10,7 @@ import entidades.Usuario;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -29,10 +30,13 @@ public class EdicionUsuario {
 
     @EJB
     Negocio neg; 
+    
     @Inject
     ControlAutorizacion ctr;
+    
     Usuario usuario;
-    Grupo gr;
+    
+    int gr;
     
     //METHODS
     
@@ -40,6 +44,7 @@ public class EdicionUsuario {
          try {
 
             this.usuario=neg.refrescarUsuario(ctr.getUsuario());
+            gr = usuario.getGrupo().getId();
 
          } catch (NegocioException ex) {
             Logger.getLogger(EdicionUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,9 +54,10 @@ public class EdicionUsuario {
     }
         
     
-    public String commit(){
-        
+    public String commit(Usuario usr) throws NegocioException{
+        usuario.setGrupo(neg.getGrupo(gr));
         neg.modificarUsuario(usuario);
+        this.usuario=neg.refrescarUsuario(ctr.getUsuario());
         return null;
     }
 
@@ -67,21 +73,29 @@ public class EdicionUsuario {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    public String getGr() {
-        return Integer.toString(gr.getId()) ;
+    public int getGr() {
+        return gr ;
     }
 
     public void setGr(int gr) {
-        this.gr = neg.getGrupo(gr);
+        this.gr = gr;
     }
     
     
     /**
      * Creates a new instance of EdicionUsuario
      */
-    public EdicionUsuario() {
-        this.usuario = new Usuario();
-        this.gr = new Grupo();
+    public EdicionUsuario()  {
+              
+    }
+    
+    @PostConstruct
+    public void init(){
+        try {
+            this.usuario=neg.refrescarUsuario(ctr.getUsuario());
+        } catch (NegocioException ex) {
+            Logger.getLogger(EdicionUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

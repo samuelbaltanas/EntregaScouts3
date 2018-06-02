@@ -41,7 +41,7 @@ public class NegocioImpl implements Negocio {
         em.refresh(u);
         return u;
     }
-
+    
     @Override
     public void nuevoUsuario(Usuario user) throws NegocioException {
         Usuario u = em.find(Usuario.class, user.getNombre());
@@ -169,7 +169,7 @@ public class NegocioImpl implements Negocio {
     
     @Override
     public void modificarDocumento(Documento doc) throws NegocioException{
-        Query q = em.createQuery("selcect d from Documento d");
+        Query q = em.createQuery("select d from Documento d");
         List<Documento> docs = q.getResultList();
         
         if (docs.contains(doc)) {

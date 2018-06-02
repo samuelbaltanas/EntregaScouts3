@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import entidades.Grupo;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import negocio.Negocio;
 
@@ -29,14 +30,14 @@ public class CreacionEdicionEvento implements Serializable {
     private Evento evento;
     boolean creacion;
 
-    ArrayList<Integer> list;
+    Integer lista[];
 
-    public ArrayList<Integer> getList() {
-        return list;
+    public Integer[] getLista() {
+        return lista;
     }
 
-    public void setList(ArrayList<Integer> list) {
-        this.list = list;
+    public void setLista(Integer[] lista) {
+        this.lista = lista;
     }
 
     public Evento getEvento() {
@@ -50,28 +51,38 @@ public class CreacionEdicionEvento implements Serializable {
     public String editar(Long id) {
         Evento event = negocio.getEvento(id);
         this.evento = event;
+
+        lista = new Integer[6];
+
+        int i = 0;
+        for (Grupo g : event.getPertenece_a()) {
+            lista[i] = g.getId();
+            ++i;
+        }
+
         creacion = false;
-       
+
         return "evento.xhtml";
     }
 
     public String crear() {
 
         this.creacion = true;
+
         return "evento.xhtml";
     }
 
     public String commit() {
 
+        List<Grupo> res = new ArrayList<>();
+
+        for (Integer i : lista) {
+            res.add(negocio.getGrupo(i));
+        }
+        evento.setPertenece_a(res);
+
         if (creacion) {
-            List<Grupo> lst = new ArrayList<>();
-            
-            for(Integer i : list) {
-                lst.add(negocio.getGrupo(i));
-            }
-            
-            evento.setPertenece_a(lst);
-            
+
             negocio.addEvento(evento);
         } else {
             negocio.setEvento(evento);
@@ -92,8 +103,7 @@ public class CreacionEdicionEvento implements Serializable {
      * Creates a new instance of CreacionEdicionEvento
      */
     public CreacionEdicionEvento() {
-        
-        this.evento = new Evento();
+        evento = new Evento();
     }
 
     public List<Grupo> listaGrupos() {
