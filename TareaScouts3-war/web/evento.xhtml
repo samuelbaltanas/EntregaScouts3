@@ -41,6 +41,7 @@
                 <h:inputTextarea id="desc" class="form-control" value="#{creacionEdicionEvento.evento.descripcion}" />
             </div>
 
+            <c:if test="#{creacionEdicionEvento.creacion}">
             <div class="form-group">
                 <h:outputLabel for="grp" value = "Grupos que participaran" />
 
@@ -53,6 +54,8 @@
                 </div>
             </div>
 
+            </c:if>
+            
             <h:inputHidden value="#{creacionEdicionEvento.evento.id}"/>
             
             <h:inputHidden value="#{creacionEdicionEvento.creacion}"/>

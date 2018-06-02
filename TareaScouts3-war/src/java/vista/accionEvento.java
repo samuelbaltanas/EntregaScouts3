@@ -77,10 +77,15 @@ public class accionEvento implements Serializable {
     public List<Evento> getEventos() {
         List<Evento> list = null;
         
+        
         if(crt.esScouter()){
             list = neg.allEventos();
         }else if(crt.esEducando()){
-            list = neg.getEventos(crt.getUsuario().getGrupo());
+            try {
+                list = neg.getEventos(crt.getUsuario());
+            } catch (NegocioException ex) {
+                Logger.getLogger(accionEvento.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return list;

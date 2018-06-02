@@ -68,11 +68,14 @@ public class NegocioImpl implements Negocio {
     }
 
     @Override
-    public List<Evento> getEventos(Grupo g) {
+    public List<Evento> getEventos(Usuario u) throws NegocioException {
 
+        em.flush();
+        Usuario us = refrescarUsuario(u);
+        
         List<Evento> res;
 
-        res = g.getLista_eventos();
+        res = us.getGrupo().getLista_eventos();
 
         return res;
     }

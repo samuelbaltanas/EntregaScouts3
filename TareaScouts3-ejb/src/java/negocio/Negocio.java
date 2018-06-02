@@ -32,7 +32,7 @@ public interface Negocio {
         public void setEvento(Evento e);
         public Evento getEvento(Long id);
         public boolean estaApuntado(Usuario usr, Long e)  throws NegocioException;
-        public List<Evento> getEventos(Grupo g);
+        public List<Evento> getEventos(Usuario u) throws NegocioException;
         public List<Evento> allEventos();
         
         public void apuntarse(Usuario user, Evento e) throws NegocioException;
