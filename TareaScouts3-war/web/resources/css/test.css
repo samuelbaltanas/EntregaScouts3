@@ -12,6 +12,10 @@ and open the template in the editor.
     background-color: #622599;
 }
 
+.nav-item:hover{
+    background-color: #8c44ff;
+}
+
 .main > form{
     margin: 10px 0 25px 0;
 }

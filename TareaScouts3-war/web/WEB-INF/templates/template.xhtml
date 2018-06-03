@@ -31,7 +31,7 @@
 
     <h:body>
 
-        <nav id="menu" class="navbar navbar-expand-sm sticky-top bg-main navbar-dark">
+        <nav id="menu" class="navbar navbar-expand-sm fixed-top bg-main navbar-dark">
 
 
             <a class="navbar-brand mr-0 mr-md-2" href="index.xhtml">
@@ -88,9 +88,9 @@
 
                             <li class="nav-item dropdown">
 
-                                <a class="nav-link " data-toggle="dropdown" href="#">
+                                <a class="nav-link" data-toggle="dropdown" href="#">
                                     <i class="fas fa-user"></i>
-                                    <h:outputText value="#{controlAutorizacion.usuario.alias}" />
+                                    <h:outputText value=" #{controlAutorizacion.usuario.alias}" />
                                     <i class="fas fa-caret-down"></i>
                                 </a>
 
@@ -145,7 +145,7 @@
                 var currentScrollPos = window.pageYOffset;
                 if (prevScrollpos > currentScrollPos) {
                     document.getElementById("menu").style.top = "0";
-                } else {
+                } else if (currentScrollPos > prevScrollpos) {
                     document.getElementById("menu").style.top = "-80px";
                 }
                 prevScrollpos = currentScrollPos;

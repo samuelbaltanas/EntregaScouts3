@@ -65,9 +65,9 @@
             <h:column>
                 <h:form>
                     <h:commandLink rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" 
-                                     action="#{accionDocumentos.verificar(docs.id)}"
-                                     class="btn btn-success">
-                    <i class="fas fa-check"></i> Validar
+                                   action="#{accionDocumentos.verificar(docs.id)}"
+                                   class="btn btn-success">
+                        <i class="fas fa-check"></i> Validar
                     </h:commandLink>
                 </h:form>
             </h:column>
@@ -75,12 +75,22 @@
             <h:column>
                 <h:form >
                     <h:commandLink class="btn btn-primary" action="#{accionDocumentos.downloadDoc(docs.id)}">
-                       <i class="fas fa-arrow-alt-circle-down"></i> Download
+                        <i class="fas fa-arrow-alt-circle-down"></i> Download
                     </h:commandLink>
                 </h:form>
             </h:column>
-
         </h:dataTable>
+
+        <div>
+            <h:form >
+                <h:commandButton type="submit"
+                                 rendered="#{!controlAutorizacion.esEducando()}"
+                                 class="btn btn-dark" 
+                                 value="Crear Documento" 
+                                 action="#{creacionDocumento.crear()}"/>
+            </h:form>
+        </div>
+
         <script>
             $("#doc-lnk").attr("class", "nav-item active");
         </script>

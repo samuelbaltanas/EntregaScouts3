@@ -33,7 +33,7 @@
                     <h:outputText value="#{evento.fecha}"></h:outputText>
                 </h:column>
                 <h:column>
-                    <h:commandButton rendered="#{controlAutorizacion.esScouter()}" class="btn btn-dark" type="submit" value="Editar evento" action="#{creacionEdicionEvento.editar(evento.id)}"/>
+                    <h:commandButton rendered="#{controlAutorizacion.esScouter()}" class="btn btn-primary" type="submit" value="Editar evento" action="#{creacionEdicionEvento.editar(evento.id)}"/>
 
                 </h:column>
                 <h:column>
@@ -52,7 +52,7 @@
         <h:form id="crear">
             <h:commandButton type="submit"
                              rendered="#{controlAutorizacion.esScouter()}"
-                             class="btn btn-dark" 
+                             class="btn btn-primary" 
                              value="Crear Evento" 
                              action="#{creacionEdicionEvento.crear()}"/>
             </h:form>
