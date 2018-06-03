@@ -78,7 +78,7 @@ public class accionEvento implements Serializable {
         List<Evento> list = null;
         
         
-        if(crt.esScouter()){
+        if(!crt.esEducando()){
             list = neg.allEventos();
         }else if(crt.esEducando()){
             try {

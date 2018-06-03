@@ -72,7 +72,7 @@
                         </li>
                     </h:form>
                     <li class="nav-item" id="lst-lnk">
-                        <h:link  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter()}" 
+                        <h:link  rendered="#{!empty controlAutorizacion.usuario and controlAutorizacion.esScouter() and controlAutorizacion.esCoordinador()}" 
                                  role="menuitem" tabindex="-1" 
                                  outcome="listaUsuarios.xhtml" class="nav-link">
                             <i class="fas fa-list-alt"></i>
