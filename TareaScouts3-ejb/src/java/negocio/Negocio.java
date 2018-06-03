@@ -9,6 +9,8 @@ package negocio;
 import entidades.Documento;
 import entidades.Evento;
 import entidades.Grupo;
+import entidades.Localidad;
+import entidades.Rol;
 import entidades.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ public interface Negocio {
         //Grupo
         public List<Grupo> listaGrupos();
         public Grupo getGrupo(int id);
+        
+        public void addLocalidad(Localidad loc);
+        public Rol getRol(Rol.Rol1 role);
         
         //Eventos
         public void addEvento(Evento e);
@@ -51,5 +56,6 @@ public interface Negocio {
         public void modificarDocumento(Documento doc) throws NegocioException;
         public void crearDocumento(Documento doc);
         public Documento getDocumento(Long id);
+        
         
 }

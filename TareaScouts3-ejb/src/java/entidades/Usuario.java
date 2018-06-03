@@ -70,17 +70,17 @@ public class Usuario implements Serializable {
 
     private Rol rol;
     
-    @OneToMany(mappedBy = "dueño")
+    @OneToMany(mappedBy = "dueño",cascade = CascadeType.MERGE)
     private List<Documento> lista_documentos;
     
-    @ManyToOne
+    @ManyToOne()
     private Localidad reside_en;
     
     
     @JoinTable(name = "jnd_usr_tut",
     joinColumns = @JoinColumn(name = "usuario_fk"),
     inverseJoinColumns = @JoinColumn(name = "tutor_legal_fk"))
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Tutor_legal> es_tutelado;
     
     @ManyToMany(cascade = CascadeType.MERGE)

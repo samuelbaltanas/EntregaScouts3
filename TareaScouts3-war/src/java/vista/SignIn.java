@@ -35,10 +35,9 @@ import negocio.UsuarioExistenteException;
 public class SignIn {
 
     private Usuario user;
+    private Localidad loc;
     private String verify;
     private int gr;
-
-  
 
     @Inject
     ControlAutorizacion ctrl;
@@ -46,28 +45,13 @@ public class SignIn {
     @EJB
     Negocio neg;
 
-    /*   @PersistenceContext(unitName = "TareaScouts3-PU")
-    private EntityManager em;
-     */
-    public List<Grupo> groupList() {
+    public SignIn() {
+        this.user = new Usuario();
+        this.loc = new Localidad();
+        
+        
+        this.verify = "";
 
-        return neg.listaGrupos();
-    }
-
-    public void setVerify(String pass) {
-        this.verify = pass;
-    }
-
-    public String getVerify() {
-        return this.verify;
-    }
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
     }
 
     public String autenticar() {
@@ -98,32 +82,58 @@ public class SignIn {
         } catch (NegocioException ex) {
             Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        neg.addLocalidad(loc);
+        
+        user.setReside_en(loc);
+        user.setRol(neg.getRol(Rol.Rol1.EDUCANDO));
+        
+        neg.modificarUsuario(user);
 
         this.ctrl.setUsuario(this.user);
 
         return "listaEventos.xhtml";
     }
 
-    
+    public List<Grupo> groupList() {
+
+        return neg.listaGrupos();
+    }
+
+    public void setVerify(String pass) {
+        this.verify = pass;
+    }
+
+    public String getVerify() {
+        return this.verify;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
 
     /**
      * Creates a new instance of SignIn
      */
-    public SignIn() {
-        this.user = new Usuario();
-        this.user.setReside_en(new Localidad());
-        this.user.setRol(new Rol(Rol.Rol1.EDUCANDO));
-        this.user.setParticipa_eventos(new LinkedList<>());
-        this.user.setLista_documentos(new LinkedList<>());
-        this.verify = "";
-
-    }
-    
-      public int getGr() {
+    public int getGr() {
         return gr;
     }
 
     public void setGr(int gr) {
         this.gr = gr;
     }
+
+    public Localidad getLoc() {
+        return loc;
+    }
+
+    public void setLoc(Localidad loc) {
+        this.loc = loc;
+    }
+    
+    
 }

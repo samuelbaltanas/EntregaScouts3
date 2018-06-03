@@ -107,7 +107,7 @@
                 <div class="form-group row">
                     <label class="control-label col-sm-2" for="localidad">Localidad:</label>
                     <div class="col-sm-4">
-                        <h:inputText class="form-control" id="localidad" value="#{signIn.user.reside_en.nombre}" required="true"/>
+                        <h:inputText class="form-control" id="localidad" value="#{signIn.loc.nombre}" required="true"/>
                     </div>
                     <span class="col-sm-6">
                         <h:message styleClass="alert alert-danger" role="error" for="localidad"/>
@@ -117,7 +117,7 @@
                 <div class="form-group row">
                     <label class="control-label col-sm-2" for="provincia">Provincia:</label>
                     <div class="col-sm-4">
-                        <h:inputText class="form-control" id="provincia" value="#{signIn.user.reside_en.provincia}" required="true"/>
+                        <h:inputText class="form-control" id="provincia" value="#{signIn.loc.provincia}" required="true"/>
                     </div>
                     <span class="col-sm-6">
                         <h:message styleClass="alert alert-danger" role="error" for="provincia"/>
@@ -127,7 +127,7 @@
                 <div class="form-group row">
                     <label class="control-label col-sm-2" for="codigo_postal">Codigo postal:</label>
                     <div class="col-sm-4">
-                        <h:inputText class="form-control" id="codigo_postal" value="#{signIn.user.reside_en.codigo_postal}" required="true">
+                        <h:inputText class="form-control" id="codigo_postal" value="#{signIn.loc.codigo_postal}" required="true">
                             <f:convertNumber pattern="#00000"/>
                         </h:inputText>
                     </div>

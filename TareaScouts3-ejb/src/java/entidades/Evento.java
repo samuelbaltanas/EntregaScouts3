@@ -39,11 +39,6 @@ public class Evento implements Serializable {
     private Date fecha;
    @Column(name="descripcion" , nullable= false , length=500)
     private String descripcion;
-
- 
-
-  
-
   
   //Relaciones
     @ManyToMany(cascade = CascadeType.MERGE)

@@ -3,6 +3,8 @@ package negocio;
 import entidades.Documento;
 import entidades.Evento;
 import entidades.Grupo;
+import entidades.Localidad;
+import entidades.Rol;
 import entidades.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -214,5 +216,22 @@ public class NegocioImpl implements Negocio {
           em.remove(ev);
            
     }
+    
+    @Override
+    public void addLocalidad(Localidad loc){
+        boolean create = !em.contains(loc);
+        
+        if (create) {
+            em.persist(loc);
+        }
+    
+    }
 
+    @Override
+    public Rol getRol(Rol.Rol1 role) {
+       return em.find(Rol.class, role);
+    }
+    
+
+    
 }
