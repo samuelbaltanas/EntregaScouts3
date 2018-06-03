@@ -61,6 +61,7 @@ public class NegocioImpl implements Negocio {
 
     @Override
     public void addEvento(Evento e) {
+        
         em.persist(e);
     }
 
@@ -72,13 +73,14 @@ public class NegocioImpl implements Negocio {
     @Override
     public List<Evento> getEventos(Usuario u) throws NegocioException {
 
-        em.flush();
         Usuario us = refrescarUsuario(u);
         
         List<Evento> res;
 
-        res = us.getGrupo().getLista_eventos();
-
+        Query q = em.createQuery("SELECT ev from Evento ev WHERE ev.pertenece_a = ?1");
+        q.setParameter(1, us.getGrupo());
+        res = q.getResultList();
+        
         return res;
     }
 
@@ -86,7 +88,13 @@ public class NegocioImpl implements Negocio {
     public List<Documento> documentosUser(Usuario usr) throws NegocioException {
 
         Usuario user = refrescarUsuario(usr);
-        List<Documento> listDomUser = user.getLista_documentos();
+        List<Documento> listDomUser;
+        
+        Query q = em.createQuery("SELECT d FROM Documento d WHERE d.dueño = ?1");
+        q.setParameter(1, usr);
+        
+        listDomUser = q.getResultList();
+            
 
         return listDomUser;
     }

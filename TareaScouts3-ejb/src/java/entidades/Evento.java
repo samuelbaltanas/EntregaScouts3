@@ -37,7 +37,7 @@ public class Evento implements Serializable {
    private String nombre;
    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-   @Column(name="descripcion" , nullable= false , length=500)
+   @Column(name="descripcion" , nullable= false , length=4092)
     private String descripcion;
   
   //Relaciones

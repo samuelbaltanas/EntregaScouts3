@@ -64,16 +64,19 @@
 
             <h:column>
                 <h:form>
-                    <h:commandButton rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" 
-                                     action="#{accionDocumentos.verificar(docs.id)}" 
-                                     value=" Validar"
-                                     class="btn btn-success"/>
+                    <h:commandLink rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" 
+                                     action="#{accionDocumentos.verificar(docs.id)}"
+                                     class="btn btn-success">
+                    <i class="fas fa-check"></i> Validar
+                    </h:commandLink>
                 </h:form>
             </h:column>
 
             <h:column>
                 <h:form >
-                    <h:commandButton value="Download" action="#{accionDocumentos.downloadDoc(docs.id)}"/>
+                    <h:commandLink class="btn btn-primary" action="#{accionDocumentos.downloadDoc(docs.id)}">
+                       <i class="fas fa-arrow-alt-circle-down"></i> Download
+                    </h:commandLink>
                 </h:form>
             </h:column>
 

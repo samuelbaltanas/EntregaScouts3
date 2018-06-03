@@ -66,8 +66,8 @@ public class Documento implements Serializable {
     }     
             
     public enum Estado{
-        PENDIENTE_ENTREGA,
         PENDIENTE_REVISION,
+        PENDIENTE_ENTREGA,
         CORRECTO
     }
 

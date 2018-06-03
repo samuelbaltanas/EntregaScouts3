@@ -20,7 +20,7 @@
 
                     <div class="form-group row">
                         <label for="pass">Contraseña:</label>
-                        <h:inputText id="pass" class="form-control" value="#{login.contrasenia}" required="true"/>
+                        <h:inputSecret id="pass" class="form-control" value="#{login.contrasenia}" required="true"/>
                     </div>
 
                     <h:commandButton type="submit" class="btn btn-primary" value="Autenticar" action="#{login.autenticar()}"/>

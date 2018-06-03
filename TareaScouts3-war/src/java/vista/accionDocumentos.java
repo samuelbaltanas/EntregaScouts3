@@ -101,7 +101,7 @@ public class accionDocumentos implements Serializable {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        doc.setEstado_documento(Documento.Estado.PENDIENTE_ENTREGA);
+        doc.setEstado_documento(Documento.Estado.PENDIENTE_REVISION);
         doc.setFecha_subida(new Date());
 
         try {

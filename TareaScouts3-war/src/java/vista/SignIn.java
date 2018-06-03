@@ -5,7 +5,6 @@
  */
 package vista;
 
-import entidades.Grupo;
 import entidades.Localidad;
 import entidades.Usuario;
 
@@ -18,7 +17,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import entidades.Grupo;
 import entidades.Rol;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -134,6 +132,5 @@ public class SignIn {
     public void setLoc(Localidad loc) {
         this.loc = loc;
     }
-    
     
 }
