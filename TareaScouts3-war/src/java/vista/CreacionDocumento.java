@@ -17,34 +17,35 @@ import negocio.NegocioException;
  *
  * @author Alberto
  */
-@Named (value="creacionDocumento")
+@Named(value = "creacionDocumento")
 @RequestScoped
-public class CreacionDocumento implements Serializable{
+public class CreacionDocumento implements Serializable {
+
     @EJB
     private Negocio neg;
-    
+
     private Documento doc;
 
     int gr;
-     
-    public String commit() throws NegocioException{
-        
+
+    public String commit() throws NegocioException {
+
         this.doc.setEstado_documento(Documento.Estado.PENDIENTE_ENTREGA);
-                             
-        for(Usuario usr : neg.getGrupo(gr).getLista_usuarios()){
-            if(usr.getRol().getId() != Rol.Rol1.EDUCANDO){
+
+        for (Usuario usr : neg.getGrupo(gr).getLista_usuarios()) {
+            if (usr.getRol().getId() != Rol.Rol1.EDUCANDO) {
                 continue;
             }
-           this.doc.setDueño(usr);
+
+            this.doc.setDueño(usr);
             usr.getLista_documentos().add(doc);
             neg.modificarUsuario(usr);
-            
+
         }
-        
+
         return "documentacion.xhtml";
     }
-    
-       
+
     public int getGr() {
         return gr;
     }
@@ -52,10 +53,11 @@ public class CreacionDocumento implements Serializable{
     public void setGr(int gr) {
         this.gr = gr;
     }
-    public List<Grupo> listaGrup(){
+
+    public List<Grupo> listaGrup() {
         return neg.listaGrupos();
     }
-    
+
     public Documento getDoc() {
         return doc;
     }
@@ -63,12 +65,11 @@ public class CreacionDocumento implements Serializable{
     public void setDoc(Documento doc) {
         this.doc = doc;
     }
-    
-    public String crear(){
+
+    public String crear() {
         return "documento.xhtml";
     }
-    
-    
+
     public CreacionDocumento() {
         doc = new Documento();
     }

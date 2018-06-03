@@ -64,7 +64,7 @@
 
             <h:column>
                 <h:form>
-                    <h:commandLink rendered="#{docs.estado_documento == 'PENDIENTE_REVISION'}" 
+                    <h:commandLink rendered="#{docs.estado_documento == 'PENDIENTE_REVISION' and controlAutorizacion.esCoordinador()}" 
                                    action="#{accionDocumentos.verificar(docs.id)}"
                                    class="btn btn-success">
                         <i class="fas fa-check"></i> Validar
@@ -74,7 +74,8 @@
 
             <h:column>
                 <h:form >
-                    <h:commandLink class="btn btn-primary" action="#{accionDocumentos.downloadDoc(docs.id)}">
+                    <h:commandLink class="btn btn-primary" rendered="#{docs.estado_documento != 'PENDIENTE_ENTREGA'}"
+                                   action="#{accionDocumentos.downloadDoc(docs.id)}">
                         <i class="fas fa-arrow-alt-circle-down"></i> Download
                     </h:commandLink>
                 </h:form>
@@ -85,7 +86,7 @@
             <h:form >
                 <h:commandButton type="submit"
                                  rendered="#{!controlAutorizacion.esEducando()}"
-                                 class="btn btn-dark" 
+                                 class="btn btn-primary" 
                                  value="Crear Documento" 
                                  action="#{creacionDocumento.crear()}"/>
             </h:form>

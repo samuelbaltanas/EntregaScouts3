@@ -6,9 +6,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="title">Documentación</ui:define>
     <ui:define name="content">
+        
         <h1>Información acerca de tu documentación.</h1>
 
-        <div class="card-columns">
+        <div class="card-deck">
             <c:forEach items="#{accionDocumentos.docsUsuario}" var="doc" >
                 <div class="card list-group-item-secondary">
 
@@ -29,7 +30,8 @@
 
                             <h:form enctype="multipart/form-data" >
                                 <div class="form-group">
-                                    <label for="upload">Subir archivo:</label>
+                                    <h:outputLabel rendered="#{doc.estado_documento=='PENDIENTE_ENTREGA'}" 
+                                                   for="upload">Subir archivo:</h:outputLabel>
                                     <div class="upload">
                                         <h:inputFile rendered="#{doc.estado_documento=='PENDIENTE_ENTREGA'}" class="form-control-file" required="true" value="#{accionDocumentos.file}" />
                                         <h:commandButton rendered="#{doc.estado_documento=='PENDIENTE_ENTREGA'}" value="Subir" action="#{accionDocumentos.commit(doc.id)}"/>
@@ -40,8 +42,9 @@
 
                             <h:form>
                                 <div class="form-group">
-                                    <h:commandLink rendered="#{doc.estado_documento!='PENDIENTE_ENTREGA'}" class="btn btn-primary" action="#{accionDocumentos.downloadDoc(doc.id)}">
-                                        <i class="fas fa-arrow-alt-circle-down"></i> Download
+                                    <h:commandLink rendered="#{doc.estado_documento!='PENDIENTE_ENTREGA'}" 
+                                                   class="btn btn-primary" action="#{accionDocumentos.downloadDoc(doc.id)}">
+                                        <i class="fas fa-arrow-alt-circle-down"></i> Descarga
                                     </h:commandLink>
                                 </div>
                             </h:form>

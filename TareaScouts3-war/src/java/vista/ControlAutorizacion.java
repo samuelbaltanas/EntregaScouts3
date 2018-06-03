@@ -53,6 +53,10 @@ public class ControlAutorizacion implements Serializable {
          return usuario.getRol().getId() == Rol.Rol1.EDUCANDO;
     }
     
+    public boolean esCoordinador(){
+         return usuario.getRol().getId() == Rol.Rol1.COORDINADOR || usuario.getRol().getId() == Rol.Rol1.RESPONSABLE_DOCUMENTACION;
+    }
+    
      public String logout()
     {
         // Destruye la sesión (y con ello, el ámbito de este bean)
