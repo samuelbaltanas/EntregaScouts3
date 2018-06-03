@@ -37,6 +37,10 @@ public class Documento implements Serializable {
     private Date fecha_limite;
     @Column(name = "file", nullable = true)
     private byte[] file;
+    @Column(name = "filename", nullable = true, length=50)
+    private String filename;
+
+    
     
     @Column(name="nombre" , nullable= false , length=50)
     private String nombre;
@@ -140,6 +144,14 @@ public class Documento implements Serializable {
 
     public void setFile(byte[] file) {
         this.file = file;
+    }
+    
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
 }

@@ -9,14 +9,21 @@ import entidades.Documento;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import negocio.Negocio;
 import negocio.NegocioException;
@@ -85,24 +92,24 @@ public class accionDocumentos implements Serializable {
         try {
             str = file.getInputStream();
             
-        
-            str.read(doc.getFile());
+            byte[] cont = new Scanner(str).useDelimiter("\\A").next().getBytes();
+            doc.setFilename(file.getSubmittedFileName());
+            doc.setFile(cont);
             
             str.close();
         } catch (IOException ex) {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        doc.setEstado_documento(Documento.Estado.CORRECTO);
-        
+        doc.setEstado_documento(Documento.Estado.PENDIENTE_ENTREGA);
+        doc.setFecha_subida(new Date());
+
         try {
             negocio.modificarDocumento(doc);
         } catch (NegocioException ex) {
             Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
         return null;
     }
 
@@ -114,4 +121,23 @@ public class accionDocumentos implements Serializable {
         }
     }
 
+    public void downloadDoc(Long id) {
+        Documento dc = negocio.getDocumento(id);
+
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        
+        ec.responseReset();
+        ec.setResponseContentType(ec.getMimeType(dc.getFilename()));
+        ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + dc.getFilename() + "\"");
+        try {
+            OutputStream out = ec.getResponseOutputStream();
+            out.write(dc.getFile());
+        } catch (IOException ex) {
+            Logger.getLogger(accionDocumentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        fc.responseComplete();
+
+    }
 }

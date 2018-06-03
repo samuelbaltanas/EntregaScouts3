@@ -3,7 +3,7 @@
   <persistence-unit name="TareaScouts3-PU" transaction-type="JTA">
     <jta-data-source>jdbc/sample</jta-data-source>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -171,10 +171,9 @@ public class NegocioImpl implements Negocio {
     
     @Override
     public void modificarDocumento(Documento doc) throws NegocioException{
-        Query q = em.createQuery("select d from Documento d");
-        List<Documento> docs = q.getResultList();
+        Documento dc = em.find(Documento.class, doc.getId());
         
-        if (docs.contains(doc)) {
+        if(dc == null){
             throw new InexistentDocException();
         }
         
